@@ -12,6 +12,7 @@ Integrates Paypal subscription button into wordpress.
 <em>Feature list</em>
 
 * Supports multiple membership levels
+* Supports sanbox/testing mode
 * Intuitive and clean backend for configuration
 * Allows sending all IPNs to your email address to monitor every transaction
 * Supports hosted/not-hosted button
@@ -28,7 +29,7 @@ Note: This plugin requires User Access Manager(UAM) plugin to work.
 1. Login to paypal and setup your IPN. Make sure to use the link to the page which the plugin has generated as the IPN url( visit <http://adred.tumblr.com/psb> for details ). 
 1. Create a subscription button, hosted or not hosted. 
 1. Embed the code anywhere in your theme as long as it's inside the loop. 
-1. Insert a hidden input with the current_user_id as the value. Got to http:adred.tumblr.com/psb for details.
+1. Insert a hidden input with the current_user_id as the value. Go to <http:adred.tumblr.com/psb> for details.
 1. That's all it! When you create a post or page, just assign it to a membership level you created using user access manager.
 
 == Changelog ==
