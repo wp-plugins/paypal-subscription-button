@@ -4,7 +4,7 @@
  * Plugin URI: http://adred.tumblr.com/psb
  * Description: Integrates Paypal Subscription Button into wordpress.
  * Author: Red Adaya
- * Version: 0.1
+ * Version: 1.0.1
  * Author URI: http://adred.tumblr.com/psb
  */
  
