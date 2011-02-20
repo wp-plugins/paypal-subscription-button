@@ -54,8 +54,8 @@ Note: This plugin requires User Access Manager(UAM) plugin to work.
 
 == Frequently Asked Questions ==
 1. Where do I ask for support? 
-   Go to adred.tumblr.com/psb and post a comment there.
+   Go to <http://adred.tumblr.com/psb> and post a comment there.
 
 == Screenshots ==
-1. plugin dashboard.
+1. Plugin Dashboard. Bigger: <http://dl.dropbox.com/u/14483154/screenshot-1.jpg> 
 
