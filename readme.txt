@@ -10,10 +10,10 @@ Stable tag: trunk
 Integrates Paypal subscription button into wordpress.
 
 Features:
-- Supports multiple membership levels.
-- Intuitive and clean backend for configuration.
-- Allows sending all IPNs to your email address to monitor every transaction.
-- Supports hosted/not-hosted button.
+1. Supports multiple membership levels.
+2. Intuitive and clean backend for configuration.
+3. Allows sending all IPNs to your email address to monitor every transaction.
+4. Supports hosted/not-hosted button.
 
 == Installation ==
 
