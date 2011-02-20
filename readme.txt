@@ -11,6 +11,8 @@ Integrates Paypal subscription button into wordpress.
 
 == Installation ==
 
+Note: This plugin requires User Access Manager(UAM) plugin to work. 
+
 1. Download and extract into wp-content/plugin directory.
 2. Download User Access Manager Plugin and install.
 3. Create custom roles. There are plugins out there for this or you can do it manually( http://adred.tumblr.com/psb for details ).
@@ -19,7 +21,7 @@ Integrates Paypal subscription button into wordpress.
 3. Login to paypal and setup your IPN. Make sure to use the link to the page which the plugin has generated as the IPN url( http://adred.tumblr.com/psb for details ). 
 4. Create a subscription button, hosted or not hosted. 
 5. Embed the code anywhere in your theme as long as it's inside the loop. 
-6. Insert this hidden input in the paypal code: <input type="hidden" name="custom" value="<?php echo $current_user->ID; ?>">
+6. Insert a hidden input with the current_user_id as the value. Got to http:adred.tumblr.com/psb for details.
 7. That's all it! When you create a post or page, just assign it to a membership level you created using user access manager.
 
 == Changelog ==
