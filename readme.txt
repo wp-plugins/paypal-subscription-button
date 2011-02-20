@@ -1,6 +1,6 @@
 === Paypal Subscription Button ===
 Contributors: adred
-Tags:  paypal, subscription, membership, members
+Tags:  paypal, subscription, membership, members, subscription button, paypal button, recurring payment, paypal subscription
 Requires at least: 3.0
 Tested up to: 3.0.5
 Stable tag: trunk
@@ -56,5 +56,5 @@ Note: This plugin requires User Access Manager(UAM) plugin to work.
    Go to adred.tumblr.com/psb and post a comment there.
 
 == Screenshots ==
-1. plugin dashboard
+1. plugin dashboard.
 
