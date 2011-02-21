@@ -3,7 +3,7 @@ Contributors: adred
 Tags:  subscription plugin, membership plugin, paypal plugin, paypal, subscription, membership, subscription button, paypal button, recurring payment, paypal subscription
 Requires at least: 3.0
 Tested up to: 3.0.5
-Stable tag: trunk
+Stable tag: 1.0.2
 
 == Description ==
 
