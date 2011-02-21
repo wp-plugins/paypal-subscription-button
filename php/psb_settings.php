@@ -12,7 +12,7 @@ if( !class_exists( 'psb_Settings' ) ) {
 		
 		function psb_admin_init() {
 			//Registers options page stylesheet
-			wp_register_style( 'psb_stylesheet', WP_PLUGIN_URL . '/test/css/settings.css' );
+			wp_register_style( 'psb_stylesheet', WP_PLUGIN_URL . '/paypal-subscription-button/css/settings.css' );
 		}
 			
 		function create_menu() {
