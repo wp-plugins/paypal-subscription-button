@@ -1,6 +1,6 @@
 === Paypal Subscription Button ===
 Contributors: adred
-Tags:  paypal, subscription, membership, members, subscription button, paypal button, recurring payment, paypal subscription
+Tags:  subscription plugin, membership plugin, paypal plugin, paypal, subscription, membership, members, subscription button, paypal button, recurring payment, paypal subscription
 Requires at least: 3.0
 Tested up to: 3.0.5
 Stable tag: trunk
