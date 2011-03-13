@@ -1,0 +1,66 @@
+/**** DIVISIONS ****/
+
+.wrap {
+	padding-left: 25px;
+}
+
+#icon-options-general {
+	margin-left: -20px;
+}
+
+#notify-update {
+	background: #FFFFE0;
+	border: 1px solid #E6DB55;
+	margin: 10px 0 0 -20px;
+	padding: 7px 0 0 10px;
+	height: 23px;
+}
+
+ul {
+	margin-top: 20px;
+}
+
+ul li span.subtitle {
+	display: block;
+	margin: 15px 0 3px;
+	font-size: 12px;
+}
+
+ul li span.title {
+	display: block;
+	margin-top: 20px;
+}
+
+ul.subtitle-margin li span.subtitle {
+	margin-bottom: 7px;
+}
+
+ul.input-align li input {
+	margin: 0 0 0 25px;
+}
+
+ul.p-options li label {
+	margin: 0 25px 0 0 ;
+}
+
+ul.cell-align li table tr td {
+	width: 100px;
+	padding: 1px;
+}
+
+ul.cell-align li table {
+	margin: 0 0 0 25px;
+}
+
+/**** TYPOGRAPHY ****/
+
+ul.cell-align li span.p-options-title {
+	color:  #191919;
+	font-style: italic;
+}
+
+ul li span.title {
+	color: #191919;
+	font-size: 15px;
+	font-style: italic;
+}
