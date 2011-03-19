@@ -179,9 +179,9 @@ if( !class_exists( 'psb_Settings' ) ) {
                                     <table> 
                                         <tr id="tr-heading">
                                             <td></td>
+                                            <td>Weekly</td>
                                             <td>Monthly</td>
-                                            <td>1 Year</td>
-                                            <td>Upfront</td>
+                                            <td>Yearly</td>
                                         </tr><?php
                                         foreach( $selected_custom_roles as $selected_custom_role ) { ?>
                                             <tr id="tr-fields">
