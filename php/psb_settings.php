@@ -239,6 +239,30 @@ if( !class_exists( 'psb_Settings' ) ) {
                                                                        value="<?php echo $p_amounts[ 'a_'.$name ]; ?>" /> 
                                                             </td> <?php
                                                             break;
+                                                        case 'week';
+                                                            $name = $p_name . "_" . $selected_custom_role; ?>
+                                                            <td><input id="<?php echo 'a_'.$name; ?>" maxlength="45" size="15"
+                                                                       name="<?php echo 'a_'.$name; ?>"
+                                                                       <?php echo ( '0' == $p_types[ $p_name ][ $name ] ) ? 'disabled ': ''; ?>
+                                                                       value="<?php echo $p_amounts[ 'a_'.$name ]; ?>" />
+                                                            </td> <?php
+                                                            break;
+                                                        case 'month';
+                                                            $name = $p_name . "_" . $selected_custom_role; ?>
+                                                            <td><input id="<?php echo 'a_'.$name; ?>" maxlength="45" size="15"
+                                                                       name="<?php echo 'a_'.$name; ?>"
+                                                                       <?php echo ( '0' == $p_types[ $p_name ][ $name ] ) ? 'disabled ': ''; ?>
+                                                                       value="<?php echo $p_amounts[ 'a_'.$name ]; ?>" />
+                                                            </td> <?php
+                                                            break;
+                                                        case 'year';
+                                                            $name = $p_name . "_" . $selected_custom_role; ?>
+                                                            <td><input id="<?php echo 'a_'.$name; ?>" maxlength="45" size="15"
+                                                                       name="<?php echo 'a_'.$name; ?>"
+                                                                       <?php echo ( '0' == $p_types[ $p_name ][ $name ] ) ? 'disabled ': ''; ?>
+                                                                       value="<?php echo $p_amounts[ 'a_'.$name ]; ?>" />
+                                                            </td> <?php
+                                                            break;
                                                     }
                                                 } ?>					
                                             </tr> <?php
