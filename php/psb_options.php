@@ -13,18 +13,22 @@ if( !class_exists( 'psb_Options' ) ) {
 		function get_psb_options() {
 			 //Default options
 			 $concat_admin_options_name = array( 'live' => 0,
-			 									 'currency' => '',
+			 				     'currency' => '',
 			                                     'merchant_email' => '',
-												 'notify_email' => '',
-												 'autoset_ipn_page' => 1,
-												 'autoset_ipn_page_ID' => '',
-												 'manual_ipn_page_ID' => '',
-												 'custom_roles' => array(),
-												 'selected_custom_roles' => array(),
-												 'payment_amounts' => array(),
-												 'payment_types' => array( 'weekly' => array(),
-												                           'monthly' => array(),
-																		   'yearly' => array() ) );
+							     'notify_email' => '',
+							     'autoset_ipn_page' => 1,
+							     'autoset_ipn_page_ID' => '',
+							     'manual_ipn_page_ID' => '',
+							     'custom_roles' => array(),
+							     'selected_custom_roles' => array(),
+							     'payment_amounts' => array(),
+							     'payment_types' => array( 'weekly' => array(),
+                                                                                       'monthly' => array(),
+                                                                                       'yearly' => array(),
+                                                                                       'week' => array(),
+                                                                                       'month' => array(),
+                                                                                       'year' => array()) );
+                         
   			 //Gets psb_admin_options form the db
 			 $aon = get_option( $this->admin_options_name );
 			 //Gets and updates the custom roles
@@ -143,24 +147,24 @@ if( !class_exists( 'psb_Options' ) ) {
 				global $current_user;
 				$current_user = wp_get_current_user(); 
 				$auto_post = array( 'ID' => '', 
-							        'menu_order' => '', 
-							        'comment_status' => 'closed',
-							   		'ping_status' => 'closed',
-							  	 	'pinged' => '', 
-							   		'post_author' => $current_user->ID, 
-							   		'post_category' => '', 
-							   		'post_content' => 'WARNING: Do not delete this post! PSB plugin uses this!', 
-							   		'post_date' => '', 
-							   		'post_date_gmt' => '', 
-							   		'post_excerpt' => '', 
-							   		'post_name' => '', 
-							   		'post_parent' => '', 
-							   		'post_password' => '', 
-							   		'post_status' => 'publish', 
-							   		'post_title' => $this->create_notify_page_title(), 
-							   		'post_type' => 'page', 
-							   		'tags_input' => '', 
-							   		'to_ping' => '' );  
+					            'menu_order' => '',
+						    'comment_status' => 'closed',
+						    'ping_status' => 'closed',
+						    'pinged' => '',
+						    'post_author' => $current_user->ID,
+						    'post_category' => '',
+						    'post_content' => 'WARNING: Do not delete this post! PSB plugin uses this!',
+						    'post_date' => '',
+						    'post_date_gmt' => '',
+						    'post_excerpt' => '',
+						    'post_name' => '',
+						    'post_parent' => '',
+						    'post_password' => '',
+						    'post_status' => 'publish',
+						    'post_title' => $this->create_notify_page_title(),
+						    'post_type' => 'page',
+						    'tags_input' => '',
+						    'to_ping' => '' );
 				//Creates page and assigns the return value(page ID) to autoset_ipn_page_ID
 				$concat_admin_options_name[ 'autoset_ipn_page_ID' ] = wp_insert_post( $auto_post );
 			}
@@ -172,8 +176,8 @@ if( !class_exists( 'psb_Options' ) ) {
 			//removed number 0, capital o, number 1 and small L
 			//Total: keys = 42, elements = 43
 			$characters = array( 'A','B','C','D','E','F','G','H','J','K','L','M',
-								 'N','P','Q','R','S','T','U','V','W','X','Y','Z',
-			  					 '1','2','3','4','5','6','7','8','9' );
+					     'N','P','Q','R','S','T','U','V','W','X','Y','Z',
+			  		     '1','2','3','4','5','6','7','8','9' );
 			//make an "empty container" or array for our keys
 			$keys = array();
 			while( count( $keys ) < 15 ) {

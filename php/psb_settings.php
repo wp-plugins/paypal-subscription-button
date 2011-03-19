@@ -161,6 +161,30 @@ if( !class_exists( 'psb_Settings' ) ) {
                                                                  <label> Yearly </label> 
                                                             </td><?php
                                                             break;
+                                                        case 'week';
+                                                            $name = $p_name . "_" . $selected_custom_role; ?>
+                                                            <td><input type="checkbox"
+                                                                       name="<?php echo $name; ?>"
+                                                                       value="1" <?php checked( '1', $p_types[ $p_name ][ $name ] ); ?> />
+                                                                 <label> 1 Week </label>
+                                                            </td><?php
+                                                            break;
+                                                        case 'month';
+                                                            $name = $p_name . "_" . $selected_custom_role; ?>
+                                                            <td><input type="checkbox"
+                                                                       name="<?php echo $name; ?>"
+                                                                       value="1" <?php checked( '1', $p_types[ $p_name ][ $name ] ); ?> />
+                                                                 <label> 1 Month </label>
+                                                            </td><?php
+                                                            break;
+                                                        case 'year';
+                                                            $name = $p_name . "_" . $selected_custom_role; ?>
+                                                            <td><input type="checkbox"
+                                                                       name="<?php echo $name; ?>"
+                                                                       value="1" <?php checked( '1', $p_types[ $p_name ][ $name ] ); ?> />
+                                                                 <label> 1 Year </label>
+                                                            </td><?php
+                                                            break;
                                                     }
                                                 } ?>
                                             </tr> <?php
@@ -179,9 +203,12 @@ if( !class_exists( 'psb_Settings' ) ) {
                                     <table> 
                                         <tr id="tr-heading">
                                             <td></td>
+                                            <td>Weekly</td>
                                             <td>Monthly</td>
+                                            <td>Yearly</td>
+                                            <td>1 Week</td>
+                                            <td>1 Month</td>
                                             <td>1 Year</td>
-                                            <td>Upfront</td>
                                         </tr><?php
                                         foreach( $selected_custom_roles as $selected_custom_role ) { ?>
                                             <tr id="tr-fields">
