@@ -77,12 +77,12 @@ if( !class_exists( 'psb_Settings' ) ) {
                     <ul class="input-align subtitle-margin">
                         <li><span class="title">Paypal merchant email address </span>
                         	<span class="subtitle">Enter the merchant email you used for setting up the subscription button.</span>
-                        	<input id="merchant_email" maxlength="150" size="40" name="merchant_email" 
+                        	<input id="merchant_email" maxlength="250" size="40" name="merchant_email"
                         	       value="<?php echo $this->option_values[ 'merchant_email' ]; ?>" />
                         </li> 
                         <li><span class="title">Transaction notification email address </span>
                         	<span class="subtitle">Enter the email address that will be sent with transaction notifications from your site.</span>
-                        	<input id="notify_email" maxlength="150" size="40" name="notify_email" 
+                        	<input id="notify_email" maxlength="250" size="40" name="notify_email"
                         	   	   value="<?php echo $this->option_values[ 'notify_email' ]; ?>" />
                         </li>
                         <li><span class="title">Payment currency</span>
@@ -103,7 +103,7 @@ if( !class_exists( 'psb_Settings' ) ) {
 							<label> Manually set the page </label>
                             <?php if( $this->option_values[ 'autoset_ipn_page' ] == 0 ) { ?>
                             	<span class="subtitle">Pls enter the ID of the page that will be sent with notifications from Paypal.</span>
-                                <input id="manual_ipn_page_ID" maxlength="45" size="40" name="manual_ipn_page_ID"  
+                                <input id="manual_ipn_page_ID" maxlength="150" size="40" name="manual_ipn_page_ID"
                                 	   value="<?php echo $this->option_values[ 'manual_ipn_page_ID' ]; ?>" />
                             <?php } ?>
                         </li>   
@@ -198,7 +198,7 @@ if( !class_exists( 'psb_Settings' ) ) {
                     <ul class="p-amounts subtitle-margin cell-align"><?php
                     	if( in_array( 1, $m_types ) ) { ?>
                             <li><span class="title">Payment amounts</span>
-                                <span class="subtitle">Enter payment amount for each membership type.</span><?php
+                                <span class="subtitle">Enter payment amount(s) for each membership type.</span><?php
                                 if( is_array( $selected_custom_roles ) && is_array( $p_amounts ) ) { ?>
                                     <table> 
                                         <tr id="tr-heading">
