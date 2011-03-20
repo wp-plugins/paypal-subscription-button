@@ -77,12 +77,12 @@ if( !class_exists( 'psb_Settings' ) ) {
                     <ul class="input-align subtitle-margin">
                         <li><span class="title">Paypal merchant email address </span>
                         	<span class="subtitle">Enter the merchant email you used for setting up the subscription button.</span>
-                        	<input id="merchant_email" maxlength="250" size="40" name="merchant_email"
+                        	<input id="merchant_email" maxlength="250" size="60" name="merchant_email"
                         	       value="<?php echo $this->option_values[ 'merchant_email' ]; ?>" />
                         </li> 
                         <li><span class="title">Transaction notification email address </span>
                         	<span class="subtitle">Enter the email address that will be sent with transaction notifications from your site.</span>
-                        	<input id="notify_email" maxlength="250" size="40" name="notify_email"
+                        	<input id="notify_email" maxlength="250" size="60" name="notify_email"
                         	   	   value="<?php echo $this->option_values[ 'notify_email' ]; ?>" />
                         </li>
                         <li><span class="title">Payment currency</span>
