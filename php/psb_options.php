@@ -35,9 +35,9 @@ if(!class_exists('psb_Options'))
                                                                 'weekly' => array(),
                                                                 'monthly' => array(),
                                                                 'yearly' => array(),
-                                                                'one-week' => array(),
                                                                 'one-month' => array(),
-                                                                'one-year' => array()
+                                                                'one-year' => array(),
+                                                                'x-days' => array()
                                                                ));
                          
               //Gets psb_admin_options from the db
@@ -174,9 +174,9 @@ if(!class_exists('psb_Options'))
                 {
                     $f_role = strtolower($role);
 
-                    if (1 == $role_status)
+                    if ($role_status >= 1) // If greater than 1, it means the value comes from x-days fieds which contain number of days.
                     {
-                        //If role status is 1, it means it is selected
+                        //If role status is >= 1, it means it is selected
 			//Assigns selected custom roles to selected_custom_roles array
 			$concat_admin_options_name['selected_custom_roles'][] = $role;
 			foreach ($payment_types AS $key => $type_role)

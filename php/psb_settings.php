@@ -181,14 +181,6 @@ if (!class_exists('psb_Settings'))
                                                                      <label> Yearly </label>
                                                                 </td><?php
                                                                 break;
-                                                            case 'one-week';
-                                                                $name = $p_name . "_" . $selected_custom_role; ?>
-                                                                <td><input type="checkbox"
-                                                                           name="<?php echo $name; ?>"
-                                                                           value="1" <?php checked('1', $p_types[$p_name][$name]); ?> />
-                                                                     <label> 1 Week </label>
-                                                                </td><?php
-                                                                break;
                                                             case 'one-month';
                                                                 $name = $p_name . "_" . $selected_custom_role; ?>
                                                                 <td><input type="checkbox"
@@ -203,6 +195,22 @@ if (!class_exists('psb_Settings'))
                                                                            name="<?php echo $name; ?>"
                                                                            value="1" <?php checked('1', $p_types[$p_name][$name]); ?> />
                                                                      <label> 1 Year </label>
+                                                                </td><?php
+                                                                break;
+                                                            case 'x-days';
+                                                                $name = $p_name . "_" . $selected_custom_role; ?>
+                                                                <td><input class="x-days"
+                                                                        maxlength="10"
+                                                                        size="6"
+                                                                        name="<?php echo $name; ?>"
+                                                                        value="<?php echo $p_types[$p_name][$name]; ?>" />
+                                                                    <label> days </label>
+                                                                <!--
+                                                                <td><input type="checkbox"
+                                                                           name="<?php echo $name; ?>"
+                                                                           value="1" <?php checked('1', $p_types[$p_name][$name]); ?> />
+                                                                     <label> X Days </label>
+                                                                -->
                                                                 </td><?php
                                                                 break;
                                                     }
@@ -228,9 +236,9 @@ if (!class_exists('psb_Settings'))
                                             <td>Weekly</td>
                                             <td>Monthly</td>
                                             <td>Yearly</td>
-                                            <td>1 Week</td>
                                             <td>1 Month</td>
                                             <td>1 Year</td>
+                                            <td>Days</td>
                                         </tr><?php
                                         foreach ($selected_custom_roles AS $selected_custom_role)
                                         { ?>
@@ -264,7 +272,7 @@ if (!class_exists('psb_Settings'))
                                                                            value="<?php echo $p_amounts['a_'.$name]; ?>" />
                                                                 </td> <?php
                                                                 break;
-                                                            case 'one-week';
+                                                            case 'x-days';
                                                                 $name = $p_name . "_" . $selected_custom_role; ?>
                                                                 <td><input id="<?php echo 'a_'.$name; ?>" maxlength="45" size="15"
                                                                            name="<?php echo 'a_'.$name; ?>"

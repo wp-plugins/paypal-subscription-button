@@ -163,7 +163,7 @@ if (!class_exists('psb_PSB'))
             if (class_exists("psb_Query"))
             {
                 // create an instance of psb_Query class.
-		$this->psb_query = new psb_Query($this->post_vars, $this->psb_mp_types);
+		$this->psb_query = new psb_Query($this->post_vars, $this->admin_options, $this->psb_mp_types);
             }
 				
             if(class_exists("psb_IPN"))
@@ -265,7 +265,7 @@ if (class_exists('psb_Cron'))
 
     if (isset($psb_cron))
     {
-        add_action('wp', array(&$psb_cron, 'reg_cron_event'));
         add_action('psb_twicedaily_event', array(&$psb_cron, 'check_member_status'));
+        add_action('wp', array(&$psb_cron, 'reg_cron_event'));
     }
 }

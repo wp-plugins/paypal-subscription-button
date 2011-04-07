@@ -12,12 +12,14 @@ if (!class_exists('psb_Query'))
         var $wpdb;
         var $payment_type;
         var $membership_type;
+        var $psb_options;
 		
-        function __construct($post_vars = NULL, $psb_mp_types = NULL)
+        function __construct($post_vars = NULL, $admin_options = NULL, $psb_mp_types = NULL)
         {
             global $wpdb;
             $this->current_user_id = $post_vars['custom'];
             $this->wpdb = $wpdb;
+            $this->admin_options = $admin_options;
 
             if ($psb_mp_types != NULL AND $post_vars != NULL)
             {
@@ -74,14 +76,15 @@ if (!class_exists('psb_Query'))
         {
             /**
              *  If it's upfront, we need to manually check if a user is due. Therefore upon registration,
-             *  we need to set the date when the user is due. Otherwise, don't set anything.
+             *  we need to set the date when the user will be due. Otherwise, don't set anything.
              */
 
+            $num_days = $this->admin_options['payment_types'][$this->payment_type][$this->payment_type.'_'.$this->membership_type];
             $current_time = date('Y-m-d H:i:s');
 
-            if ($this->payment_type == 'one-week')
+            if ($this->payment_type == 'x-days')
             {
-               $due_time = date('Y-m-d H:i:s', strtotime('+1 week', strtotime($current_time)));
+               $due_time = date('Y-m-d H:i:s', strtotime('+'.$num_days.' day', strtotime($current_time)));
             }
             else if ($this->payment_type == 'one-month')
             {
