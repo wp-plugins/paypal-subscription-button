@@ -138,9 +138,18 @@ if (!class_exists('psb_Query'))
             }
         }
 	
-        function update_status($status)
+        function update_status($status, $user_id = '')
         {
-            $affected_rows = $this->wpdb->update($this->wpdb->psb_members, array('status' => $status), array('wp_user_id' => $this->current_user_id));
+            if ($user_id != '')
+            {
+                $id = $user_id;
+            }
+            else
+            {
+                $id = $this->current_user_id;
+            }
+            
+            $affected_rows = $this->wpdb->update($this->wpdb->psb_members, array('status' => $status), array('wp_user_id' => $id));
 			
             if ($affected_rows > 0)
             {
@@ -152,10 +161,19 @@ if (!class_exists('psb_Query'))
             }
         }
 		
-        function log_end()
+        function log_end($user_id = '')
         {
+            if ($user_id != '')
+            {
+                $id = $user_id;
+            }
+            else
+            {
+                $id = $this->current_user_id;
+            }
+            
             $current_time = date('Y-m-d H:i:s');
-            $affected_rows = $this->wpdb->insert($this->wpdb->psb_cancelled, array('wp_user_id' => $this->current_user_id, 'date' => $current_time));
+            $affected_rows = $this->wpdb->insert($this->wpdb->psb_cancelled, array('wp_user_id' => $id, 'date' => $current_time));
 
             if ($affected_rows > 0)
             {
@@ -167,13 +185,21 @@ if (!class_exists('psb_Query'))
             }
         }
 
-        function get_active_users()
+        function get_due_users()
         {
-            $query_result = $this->wpdb->get_row("SELECT * FROM ".$this->wpdb->psb_members." WHERE status = 'active' ");
-           
+            $current_time = date('Y-m-d H:i:s');
+            
+            $query_result = $this->wpdb->get_results("SELECT * FROM ".$this->wpdb->psb_members." WHERE TIMESTAMPDIFF(MINUTE, due, '".$current_time."') >= 0 AND status = 'active' AND due != 0");
+
             if ($query_result)
             {
-                return $query_result;
+                $due_users = Array();
+                
+                foreach ($query_result as $row_obj)
+                {
+                    $due_users[] = $row_obj->wp_user_id;
+                }
+                return $due_users;
             }
             else
             {

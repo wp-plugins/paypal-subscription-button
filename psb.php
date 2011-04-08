@@ -265,7 +265,7 @@ if (class_exists('psb_Cron'))
 
     if (isset($psb_cron))
     {
-        add_action('psb_twicedaily_event', array(&$psb_cron, 'check_member_status'));
+        add_action('psb_cron_event', array(&$psb_cron, 'update_member_status'));
         add_action('wp', array(&$psb_cron, 'reg_cron_event'));
     }
 }

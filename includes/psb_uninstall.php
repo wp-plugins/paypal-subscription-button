@@ -14,9 +14,9 @@ function psb_uninstall()
      * Remove // below to enable deleting of tables during uninstall.
      */
         
-    $wpdb->query("DROP TABLE IF EXISTS $table_name1");
-    $wpdb->query("DROP TABLE IF EXISTS $table_name2");
-    $wpdb->query("DROP TABLE IF EXISTS $table_name3");
+    //$wpdb->query("DROP TABLE IF EXISTS $table_name1");
+    //$wpdb->query("DROP TABLE IF EXISTS $table_name2");
+    //$wpdb->query("DROP TABLE IF EXISTS $table_name3");
 
     psb_delete_options();
 }
