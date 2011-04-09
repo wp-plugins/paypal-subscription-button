@@ -67,7 +67,7 @@ if(!class_exists('psb_Options'))
               return $concat_admin_options_name;
 	}
 		
-	function assign_new_values(&$concat_admin_options_name, $aon = NULL)
+	function assign_new_values(&$concat_admin_options_name, $aon = '')
         {
             if (!empty($this->post_vars))
             {

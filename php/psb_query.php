@@ -14,14 +14,14 @@ if (!class_exists('psb_Query'))
         var $membership_type;
         var $psb_options;
 		
-        function __construct($post_vars = NULL, $admin_options = NULL, $psb_mp_types = NULL)
+        function __construct($post_vars = '', $admin_options = '', $psb_mp_types = NULL)
         {
             global $wpdb;
             $this->current_user_id = $post_vars['custom'];
             $this->wpdb = $wpdb;
             $this->admin_options = $admin_options;
 
-            if ($psb_mp_types != NULL AND $post_vars != NULL)
+            if ($psb_mp_types != NULL AND $post_vars != '')
             {
                 $this->payment_type = $psb_mp_types->get_payment_type();
                 $this->membership_type = $psb_mp_types->get_membership_type();
