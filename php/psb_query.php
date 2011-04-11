@@ -189,7 +189,11 @@ if (!class_exists('psb_Query'))
         {
             $current_time = date('Y-m-d H:i:s');
             
-            $query_result = $this->wpdb->get_results("SELECT * FROM ".$this->wpdb->psb_members." WHERE TIMESTAMPDIFF(MINUTE, due, '".$current_time."') >= 0 AND status = 'active' AND due != 0");
+            $query_result = $this->wpdb->get_results("SELECT * FROM ".$this->wpdb->psb_members." 
+                                                      WHERE TIMESTAMPDIFF(MINUTE, due, '".$current_time."') >= 0
+                                                      AND status = 'active'
+                                                      AND due != 0"
+                                                    );
 
             if ($query_result)
             {

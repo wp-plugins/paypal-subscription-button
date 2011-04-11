@@ -2,8 +2,8 @@
 Contributors: adred
 Tags:  subscription plugin, membership plugin, paypal plugin, paypal, subscription, membership, subscription button, paypal button, recurring payment, paypal subscription
 Requires at least: 3.0
-Tested up to: 3.1
-Stable tag: 1.0.2
+Tested up to: 3.1.1
+Stable tag: 1.2.0
 
 == Description ==
 
@@ -13,11 +13,16 @@ I created this plugin because I couldn't find one that integrates well and FREE.
 
 <em>Feature list</em>
 
+As of version 1.2.0:
+* Supports "buy now" button.
+* Allows (x) number of days for one time payment using "buy now" button.
+* Uses Wordpress cron to automatically check member status who subscribed using "buy now" button.
+
+As of version 1.0.2:
 * Supports multiple membership levels
-* Supports sanbox/testing mode
+* Supports sandbox/testing mode
 * Intuitive and clean backend for configuration
 * Allows sending all IPNs to your email address to monitor every transaction
-* Supports hosted/not-hosted button
 
 == Installation ==
 
@@ -35,6 +40,18 @@ Note: This plugin requires User Access Manager(UAM) plugin to work.
 1. That's all it! When you create a post or page, just assign it to a membership level you created using user access manager.
 
 == Changelog ==
+
+Here you found the changes in each version.
+
+    Version		Date      	Changes
+
+    1.2.0               2011-4-11       Add support for buy now button
+                                        Add support for wordpress cron.
+                                        Fix: Disable deletion of custom tables after uninstall.
+
+    1.0.2		2011-3-19	Fix: No styling in the admin interface
+
+    1.0.1	        2011-2-10	First release.
 
 == Credits ==
 
