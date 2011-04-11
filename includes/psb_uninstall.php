@@ -1,6 +1,10 @@
 <?php
-//Uninstalls custom database tables.
-function psb_uninstall() {
+/**
+ * Uninstall untility
+ */
+
+function psb_uninstall()
+{
     global $wpdb;
     $table_name1 = $wpdb->prefix . "psb_members";
     $table_name2 = $wpdb->prefix . "psb_transactions";
@@ -17,7 +21,8 @@ function psb_uninstall() {
     psb_delete_options();
 }
 
-function psb_delete_options() {
+function psb_delete_options()
+{
     //Add options for admin settings.
     delete_option("psb_db_version");
     //delete_option("psb_admin_options");
