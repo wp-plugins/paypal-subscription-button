@@ -9,7 +9,7 @@ Stable tag: 1.2.0
 
 Integrates Paypal subscription button into wordpress.
 
-I created this plugin because I couldn't find one that integrates well and FREE. So far, all of the paypal plugins I tested are broken. :-) I hope this one will finally end the agony of the people who seek the same functionality as me. 
+I created this plugin because I couldn't find one that integrates well and FREE. So far, all of the paypal plugins I tested are broken. :-) I hope this one will finally end the agony of the people who seek the same functionality as me.
 
 <em>Feature list</em>
 
@@ -26,16 +26,16 @@ As of version 1.0.2:
 
 == Installation ==
 
-Note: This plugin requires User Access Manager(UAM) plugin to work. 
+Note: This plugin requires User Access Manager(UAM) plugin to work.
 
 1. Download and extract into wp-content/plugin directory.
 1. Download User Access Manager Plugin and install.
 1. Create custom roles. There are plugins out there for this or you can do it manually( visit <http://adred.tumblr.com/psb> for details ).
 1. Create user group names or membership levels and assign them to your custom roles. This is handled via GUI using user access manager.
 1. Activate psb plugin and fill out the settings form.
-1. Login to paypal and setup your IPN. Make sure to use the link to the page which the plugin has generated as the IPN url( visit <http://adred.tumblr.com/psb> for details ). 
-1. Create a subscription button, hosted or not hosted. 
-1. Embed the code anywhere in your theme as long as it's inside the loop. 
+1. Login to paypal and setup your IPN. Make sure to use the link to the page which the plugin has generated as the IPN url( visit <http://adred.tumblr.com/psb> for details ).
+1. Create a subscription button, hosted or not hosted.
+1. Embed the code anywhere in your theme as long as it's inside the loop.
 1. Insert a hidden input with the current_user_id as the value. Go to <http:adred.tumblr.com/psb> for details.
 1. That's all it! When you create a post or page, just assign it to a membership level you created using user access manager.
 
@@ -45,13 +45,13 @@ Here you found the changes in each version.
 
     Version		Date      	Changes
 
-    1.2.0               2011-4-11       Add support for buy now button
+    1.2.0       2011-4-11       Add support for buy now button
                                         Add support for wordpress cron.
                                         Fix: Disable deletion of custom tables after uninstall.
 
     1.0.2		2011-3-19	Fix: No styling in the admin interface
 
-    1.0.1	        2011-2-10	First release.
+    1.0.1       2011-2-10	First release.
 
 == Credits ==
 
@@ -62,19 +62,19 @@ Here you found the changes in each version.
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 3 of the License, or
    (at your option) any later version.
-	
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-	
+
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 == Frequently Asked Questions ==
-1. Where do I ask for support? 
+1. Where do I ask for support?
    Go to <http://adred.tumblr.com/psb> and post a comment there.
 
 == Screenshots ==
-1. Plugin Dashboard. Bigger: <http://dl.dropbox.com/u/14483154/screenshot-1.jpg> 
+1. Plugin Dashboard. Bigger: <http://dl.dropbox.com/u/14483154/screenshot-1.jpg>
 
