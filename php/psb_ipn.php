@@ -109,11 +109,6 @@ if (!class_exists("psb_IPN") )
             return;
 	}
 
-        function temp_email($message)
-        {
-            mail('joannmarfe.delacruz@gmail.com', 'Cron Testing', $message, '');
-        }
-
 	function get_paypal_url() 
         {
             // get the paypal url set from the options page

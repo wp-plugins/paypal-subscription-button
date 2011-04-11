@@ -35,8 +35,6 @@ if (!class_exists('psb_Cron'))
 
         function update_member_status()
         {
-            $this->psb_ipn->temp_email('Yay! Cron is working!');
-
             //Get the wp user id of users who are due.
             $this->result = $this->psb_query->get_due_users();
             
