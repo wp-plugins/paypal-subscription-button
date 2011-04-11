@@ -18,11 +18,6 @@ if (!class_exists('psb_Cron'))
             {
                 $this->psb_query = new psb_Query();
             }
-
-            if (class_exists('psb_IPN'))
-            {
-                $this->psb_ipn = new psb_IPN();
-            }
         }
 
         function reg_cron_event()
