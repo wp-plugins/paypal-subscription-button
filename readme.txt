@@ -13,12 +13,9 @@ I created this plugin because I couldn't find one that integrates well and FREE.
 
 <em>Feature list</em>
 
-As of version 1.2.0:
 * Supports "buy now" button.
 * Allows (x) number of days for one time payment using "buy now" button.
 * Uses Wordpress cron to automatically check member status who subscribed using "buy now" button.
-
-As of version 1.0.2:
 * Supports multiple membership levels
 * Supports sandbox/testing mode
 * Intuitive and clean backend for configuration
