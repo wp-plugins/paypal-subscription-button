@@ -11,6 +11,8 @@ Integrates Paypal subscription button into wordpress.
 
 I created this plugin because I couldn't find one that integrates well and FREE. So far, all of the paypal plugins I tested are broken. :-) I hope this one will finally end the agony of the people who seek the same functionality as me.
 
+Appeal: If it works click the "Works" button, if it don't works click the "Broken" button and send me an error report. That is the only way to find bugs and see if the plugin works proper. Thanks.
+
 <em>Feature list</em>
 
 * Supports multiple membership levels
