@@ -44,9 +44,9 @@ Here you found the changes in each version.
 
     Version		Date      	Changes
 
-    1.2.0       2011-4-11       Add support for buy now button
-                                Add support for wordpress cron.
-                                Fix: Disable deletion of custom tables after uninstall.
+    1.2.0       2011-4-11   Add support for buy now button
+                            Add support for wordpress cron.
+                            Fix: Disable deletion of custom tables after uninstall.
 
     1.0.2		2011-3-19	Fix: No styling in the admin interface
 
