@@ -7,7 +7,7 @@ Stable tag: 1.2.0
 
 == Description ==
 
-Integrates Paypal subscription button into wordpress.
+Integrates Paypal Subscription and Buy Now button into Wordpress. This plugin is primarily for membership sites.
 
 I created this plugin because I couldn't find one that integrates well and FREE. So far, all of the paypal plugins I tested are broken. :-) I hope this one will finally end the agony of the people who seek the same functionality as me.
 
