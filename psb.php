@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Paypal Subscription Button
  * Plugin URI: http://adred.tumblr.com/psb
- * Description: Integrates Paypal Subscription Button into wordpress.
+ * Description: Integrates Paypal Subscription and Buy Now button into Wordpress. This plugin is primarily for membership sites.
  * Author: Red Adaya
  * Version: 1.2.0
  * Author URI: http://adred.tumblr.com/psb

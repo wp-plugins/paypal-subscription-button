@@ -82,6 +82,8 @@ if (!class_exists('psb_Settings'))
                     <input type="hidden" name="updatepsboptions"  value="true" />
                     <input type="hidden" name="autoset_ipn_page_ID"  value="<?php echo $this->option_values['autoset_ipn_page_ID']; ?>" />
 
+                    <span><h4>For detailed instruction on how to setup PSB, pls go to: <a href="http://adred.tumblr.com/psb">http://adred.tumblr.com/psb</a></h4></span>
+
                     <ul class="input-align subtitle-margin">
                         <li><span class="title">Do you want PSB to go live?</span>
                             <span class="subtitle">Choose either live "paypal.com" or test mode "sandbox.paypal.com".</span>
