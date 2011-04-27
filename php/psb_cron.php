@@ -40,16 +40,19 @@ if (!class_exists('psb_Cron'))
             //Get the wp user id of users who are due.
             $this->result = $this->psb_query->get_due_users();
             
-            foreach ($this->result as $value)
+            if (is_array($this->result))
             {
-                $this->wp_user_obj = new WP_User($value);
+                foreach ($this->result as $value)
+                {
+                    $this->wp_user_obj = new WP_User($value);
 
-                //Deactive user subscription.
-                $this->wp_user_obj->set_role('subscriber');
-                //Update user status in the db.
-                $this->psb_query->update_status('expired', $value);
-                //Log the end of subscription.
-                $this->psb_query->log_end($value);
+                    //Deactive user subscription.
+                    $this->wp_user_obj->set_role('subscriber');
+                    //Update user status in the db.
+                    $this->psb_query->update_status('expired', $value);
+                    //Log the end of subscription.
+                    $this->psb_query->log_end($value);
+                }
             }
         }
     }
