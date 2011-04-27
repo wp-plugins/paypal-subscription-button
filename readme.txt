@@ -3,7 +3,7 @@ Contributors: adred
 Tags:  subscription plugin, membership plugin, paypal plugin, paypal, subscription, membership, subscription button, paypal button, recurring payment, paypal subscription
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 
 == Description ==
 
@@ -43,7 +43,9 @@ Note: This plugin requires User Access Manager(UAM) plugin to work.
 Here you found the changes in each version.
 
     Version		Date      	Changes
-
+    
+    1.2.1       2011-4-27   Fix: Check first if value returned from query for due users is array or not.
+                            Fix: Change add_option to update_option for dynamic version update during installation.
     1.2.0       2011-4-11   Add support for buy now button
                             Add support for wordpress cron.
                             Fix: Disable deletion of custom tables after uninstall.
