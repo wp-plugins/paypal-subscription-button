@@ -45,7 +45,7 @@ function psb_install ()
 	  PRIMARY KEY  (cancel_id)
 	) $charset_collate;";
 
-       if (get_option('psb_db_version') != '1.2.0')
+       if (get_option('psb_db_version') != '1.2.0' AND get_option('psb_db_version') != '1.2.1')
        {
           /*
            * If the db is old which means the plugin is an older version, delete subscr_id columns since they're not needed anymore.
@@ -65,5 +65,5 @@ function psb_install ()
 function psb_add_options()
 {
     //Add options for admin settings.
-    add_option('psb_db_version', '1.2.0');
+    update_option('psb_db_version', '1.2.1');
 }
