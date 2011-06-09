@@ -46,7 +46,7 @@ if (!class_exists('psb_Settings'))
             if (class_exists('psb_Options'))
             {
                 //only instantiates psb_Options when form is submitted
-		if (isset($this->post_vars['updatepsboptions']) AND $this->post_vars['updatepsboptions'] == true)
+		if ($this->post_vars['update'] == true)
                 {
                     //instantiates psb_Options class and pass post_vars to it
                     $psb_options = new psb_Options($this->post_vars);
@@ -78,11 +78,73 @@ if (!class_exists('psb_Settings'))
                 { ?>
                     <div id="notify-update"><span>Settings have been succesfully saved...</span></div> <?php
                 } ?>
-                <form method="post" action="">
+                
+                <form id="custom-roles-table" method="post" action="">
+                    
+                    <input type="hidden" name="deletecustomroles"  value="true" />
+                    <input type="hidden" name="update"  value="true" />
+                    
+                    <span class="cr-title">Custom Roles</span>
+                    <table id="cr-table">
+                        <tr id="cr-heading">
+                            <td class="cr-blank-col"></td>
+                            <td class="cr-name-col">Name</td>
+                            <td class="cr-desc-col">Description</td>
+                            <td class="cr-status-col">Status</td>
+                        </tr>
+                        <tr>
+                            <td class="cr-blank-col"><input type="checkbox" name="<?php echo $name; ?>" value="1" <?php checked('1', $p_types[$p_name][$name]); ?> /></td>
+                            <td>Silver</td>
+                            <td>Silver subscription</td>
+                            <td>Active</td>
+                        </tr>
+                        <tr>
+                            <td class="cr-blank-col"><input type="checkbox" name="<?php echo $name; ?>" value="1" <?php checked('1', $p_types[$p_name][$name]); ?> /></td>
+                            <td>Silver</td>
+                            <td>Silver subscription</td>
+                            <td>Active</td>
+                        </tr>
+                        <tr>
+                            <td class="cr-blank-col"><input type="checkbox" name="<?php echo $name; ?>" value="1" <?php checked('1', $p_types[$p_name][$name]); ?> /></td>
+                            <td>Silver</td>
+                            <td>Silver subscription</td>
+                            <td>Active</td>
+                        </tr>
+                    </table>
+                    <span><input type="submit" class="button-primary" value="<?php _e('Delete Role(s)') ?>" /></span>                
+                </form>
+                    
+                <form id="add-custom-roles" method="post" action="">
+                    <input type="hidden" name="addcustomrole"  value="true" />
+                    <input type="hidden" name="update"  value="true" />
+                    
+                    <span class="cr-title">Add Custom Role</span>
+                    <ul class="cr-ul">
+                        <li><label>Role name: </label>
+                            <input id="role-name" maxlength="250" size="60" name="role_name" value="" />
+                        </li>
+                        <li><label>Role description: </label>
+                            <input id="role-desc" maxlength="250" size="120" name="role_desc" value="" />
+                        </li>
+                        <li><span>Privilege(s):</span></li>
+                        <ul class="cr-ul">
+                            <li><span class="subtitle privileges-title">Choose if a user can read, edit, and delete posts.</span></li>
+                            <ul class="cr-ul privileges">
+                                <li><input type="checkbox" name="canread" value="" /><span>Read</span></li>
+                                <li><input type="checkbox" name="canedit" value=""  /><span>Edit</span></li>
+                                <li><input type="checkbox" name="candelete" value="" /><span>Delete</span></li>
+                                <p class="submit">
+                                    <input type="submit" class="button-primary" value="<?php _e('Add Role') ?>" />
+                                </p>
+                            </ul>
+                        </ul>
+                    </ul>
+                </form> 
+                    
+                <form id="psb-options" method="post" action="">
                     <input type="hidden" name="updatepsboptions"  value="true" />
+                    <input type="hidden" name="update"  value="true" />
                     <input type="hidden" name="autoset_ipn_page_ID"  value="<?php echo $this->option_values['autoset_ipn_page_ID']; ?>" />
-
-                    <span><h4>For detailed instruction on how to setup PSB, pls go to: <a href="http://adred.tumblr.com/psb">http://adred.tumblr.com/psb</a></h4></span>
 
                     <ul class="input-align subtitle-margin">
                         <li><span class="title">Do you want PSB to go live?</span>

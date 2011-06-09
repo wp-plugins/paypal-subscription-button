@@ -45,14 +45,14 @@ if(!class_exists('psb_Options'))
               //Gets and updates the custom roles
               $this->get_custom_roles($concat_admin_options_name);
 			 
-              if (!empty($aon) AND (!isset($this->post_vars['updatepsboptions']) OR !$this->post_vars['updatepsboptions'] ))
+              if (!empty($aon) AND (!isset($this->post_vars['update']) OR !$this->post_vars['update'] ))
               {
                     //Adds new array elements to the old psb_admin_options. This is to retain the old options during upgrades.
                     //Only enter this block if updatepsboptions post_var is set to true
                     $this->assign_new_values($concat_admin_options_name, $aon);
               }
 			 
-              if (isset($this->post_vars['updatepsboptions']) AND true == $this->post_vars['updatepsboptions'])
+              if (isset($this->post_vars['update']) AND true == $this->post_vars['update'])
               {
                     //Assigns the post_vars values to array elements in $concat_admin_options_name
                     //This generates new elements for arrays in $concat_admin_options_name in the process
