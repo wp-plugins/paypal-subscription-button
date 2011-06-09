@@ -286,9 +286,9 @@ if(!class_exists('psb_Options'))
             
             $role_name = $this->post_vars['role_name'];
             $role_desc = $this->post_vars['role_desc'];
-            $canread = (bool) $this->post_vars['canread'];
-            $canedit = (bool) $this->post_vars['canedit'];
-            $candelete = (bool) $this->post_vars['candelete'];
+            $canread = ($this->post_vars['canread'] == 1) ? true : false;
+            $canedit = ($this->post_vars['canedit'] == 1) ? true : false;
+            $candelete = ($this->post_vars['candelete'] == 1) ? true : false;
             
             add_role($role_name, 
                      ucfirst($role_name), 

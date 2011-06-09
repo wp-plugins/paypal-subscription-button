@@ -11,6 +11,7 @@ if (!class_exists('psb_Settings'))
     	var $post_vars;
 	var $option_values;
 	var $update;
+        var $custom_roles;
 	
 	function __construct($post_vars)
         {
@@ -65,6 +66,8 @@ if (!class_exists('psb_Settings'))
                 //gets psb_admin_options array from the the db directly when coming from other admin menus-- no form is submitted.
 		$this->option_values = get_option('psb_admin_options');
             }
+            
+            $this->custom_roles = get_option('psb_custom_roles');
 	}
 	
 	function print_settings()
@@ -92,24 +95,32 @@ if (!class_exists('psb_Settings'))
                             <td class="cr-desc-col">Description</td>
                             <td class="cr-status-col">Status</td>
                         </tr>
-                        <tr>
-                            <td class="cr-blank-col"><input type="checkbox" name="<?php echo $name; ?>" value="1" <?php checked('1', $p_types[$p_name][$name]); ?> /></td>
-                            <td>Silver</td>
-                            <td>Silver subscription</td>
-                            <td>Active</td>
-                        </tr>
-                        <tr>
-                            <td class="cr-blank-col"><input type="checkbox" name="<?php echo $name; ?>" value="1" <?php checked('1', $p_types[$p_name][$name]); ?> /></td>
-                            <td>Silver</td>
-                            <td>Silver subscription</td>
-                            <td>Active</td>
-                        </tr>
-                        <tr>
-                            <td class="cr-blank-col"><input type="checkbox" name="<?php echo $name; ?>" value="1" <?php checked('1', $p_types[$p_name][$name]); ?> /></td>
-                            <td>Silver</td>
-                            <td>Silver subscription</td>
-                            <td>Active</td>
-                        </tr>
+                        
+                        <?php foreach ($this->custom_roles as $role => $value) 
+                        { ?>
+                            <tr>
+                            <td class="cr-blank-col"><input type="checkbox" name="<?php echo $role; ?>" value="1" /></td>
+                            <td><?php echo ucfirst($role); ?></td>
+                            <td><?php echo $value['desc']; ?></td>
+                            <?php
+                            $role = strtolower($role);
+                            $selected_custom_roles = $this->option_values['selected_custom_roles'];
+                            $match = 0;
+                            foreach ($selected_custom_roles as $selected_custom_role)
+                            {
+                                if ($role == strtolower($selected_custom_role))
+                                { 
+                                    $match = 1; ?>
+                                    <td>Active</td> <?php
+                                    continue;
+                                }
+                            } 
+                            if ($match == 0)
+                            { ?>
+                                <td>Inctive</td> <?php
+                            } ?>
+                        </tr> <?php
+                        } ?> 
                     </table>
                     <span><input type="submit" class="button-primary" value="<?php _e('Delete Role(s)') ?>" /></span>                
                 </form>
@@ -130,9 +141,9 @@ if (!class_exists('psb_Settings'))
                         <ul class="cr-ul">
                             <li><span class="subtitle privileges-title">Choose if a user can read, edit, and delete posts.</span></li>
                             <ul class="cr-ul privileges">
-                                <li><input type="checkbox" name="canread" value="" /><span>Read</span></li>
-                                <li><input type="checkbox" name="canedit" value=""  /><span>Edit</span></li>
-                                <li><input type="checkbox" name="candelete" value="" /><span>Delete</span></li>
+                                <li><input type="checkbox" name="canread" value="1" /><span>Read</span></li>
+                                <li><input type="checkbox" name="canedit" value="1"  /><span>Edit</span></li>
+                                <li><input type="checkbox" name="candelete" value="1" /><span>Delete</span></li>
                                 <p class="submit">
                                     <input type="submit" class="button-primary" value="<?php _e('Add Role') ?>" />
                                 </p>
