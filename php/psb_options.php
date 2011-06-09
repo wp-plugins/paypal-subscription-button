@@ -8,9 +8,12 @@ if(!class_exists('psb_Options'))
 	
     class psb_Options
     {
-        var $admin_options_name = "psb_admin_options";
+        var $wp_settings_handle = 'psb_admin_options';
+        var $wp_customroles_handle = 'psb_custom_roles';
+        var $wp_lastpostvars_handle = 'psb_last_postvars';
 	var $default_roles = array('Administrator', 'Editor', 'Author', 'Contributor', 'Subscriber');
-	var $post_vars;
+	var $post_vars = array();
+        var $settings = array();
 		
 	function __construct($post_vars = '')
         {
@@ -20,7 +23,7 @@ if(!class_exists('psb_Options'))
 	function get_psb_options()
         {
              //Default options
-             $concat_admin_options_name = array(
+             $this->settings = array(
                                             'live' => 0,
                   			    'currency' => '',
 			                    'merchant_email' => '',
@@ -41,71 +44,77 @@ if(!class_exists('psb_Options'))
                                                                ));
                          
               //Gets psb_admin_options from the db
-              $aon = get_option($this->admin_options_name);
-              //Gets and updates the custom roles
-              $this->get_custom_roles($concat_admin_options_name);
+              $existing = get_option($this->wp_settings_handle);
 			 
-              if (!empty($aon) AND (!isset($this->post_vars['update']) OR !$this->post_vars['update'] ))
+              if (is_array($existing) AND !$this->post_vars['update'])
               {
                     //Adds new array elements to the old psb_admin_options. This is to retain the old options during upgrades.
-                    //Only enter this block if updatepsboptions post_var is set to true
-                    $this->assign_new_values($concat_admin_options_name, $aon);
+                    $this->settings = array_merge($this->settings, $existing);
               }
-			 
-              if (isset($this->post_vars['update']) AND true == $this->post_vars['update'])
+              else
               {
-                    //Assigns the post_vars values to array elements in $concat_admin_options_name
-                    //This generates new elements for arrays in $concat_admin_options_name in the process
-                    $this->assign_new_values($concat_admin_options_name);
-                    $this->generate_type_role_option_name($concat_admin_options_name);
-                    $this->assign_new_values($concat_admin_options_name);
-                    $this->create_notify_page($aon, $concat_admin_options_name);
+                    if ($this->post_vars['updatepsboptions'])
+                    {
+                        // save the last sent $_POST for later use
+                        update_option($this->wp_lastpostvars_handle, $this->post_vars);
+                    }
+                  
+                    if ($this->post_vars['addcustomrole'])
+                    {
+                        $this->add_customrole();
+                        $this->post_vars = get_option($this->wp_lastpostvars_handle);
+                    }
+                    
+                    //Gets and updates the custom roles
+                    $this->get_custom_roles();
+                  
+                    //Assigns the post_vars values to array elements in $this->settings
+                    //This generates new elements for arrays in $this->settings in the process
+                    $this->assign_new_values();
+                    $this->generate_type_role_option_name();
+                    $this->assign_new_values();
+                    $this->create_notify_page();
+                    
+                    //Inserts the final set of options into the wp db
+                    update_option($this->wp_settings_handle, $this->settings);
               }
-
-              //Inserts the final set of options into the wp db
-              update_option($this->admin_options_name, $concat_admin_options_name);
-              return $concat_admin_options_name;
+              
+              return $this->settings;
 	}
 		
-	function assign_new_values(&$concat_admin_options_name, $aon = '')
+	function assign_new_values()
         {
-            if (!empty($this->post_vars))
+            if (is_array($this->post_vars))
             {
-                $array_source = $this->post_vars;
-            }
-            else
-            {
-                $array_source = $aon;
-            }
-
-            foreach ($array_source AS $name => $value)
-            {
-                //Checks if the $name exists as a key in $concat_admin_options_name
-		//Assigns the return value to $match_key
-		$match_key = $this->multi_array_key_exists($name, $concat_admin_options_name);
-		$multi_keys = explode(':', $match_key);
-		$multi_keys_length = count($multi_keys);
-
-		if  (0 < $multi_keys_length)
+                foreach ($this->post_vars AS $name => $value)
                 {
-                    //If the key belongs to a multi dimensional array, the parser should enter this block
-                    if (2 == $multi_keys_length)
+                    //Checks if the $name exists as a key in $this->settings
+                    //Assigns the return value to $match_key
+                    $match_key = $this->multi_array_key_exists($name, $this->settings);
+                    $multi_keys = explode(':', $match_key);
+                    $multi_keys_length = count($multi_keys);
+
+                    if  ($multi_keys_length > 0)
                     {
-                        //If the key belongs to a two dimensional array
-			$concat_admin_options_name[$multi_keys[0]][$multi_keys[1]] = $value;
+                        //If the key belongs to a multi dimensional array, the parser should enter this block
+                        if ($multi_keys_length == 2)
+                        {
+                            //If the key belongs to a two dimensional array
+                            $this->settings[$multi_keys[0]][$multi_keys[1]] = $value;
+                        }
+                        else if ($multi_keys_length == 3)
+                        {
+                            //If the key belongs to a three dimensional array
+                            $this->settings[$multi_keys[0]][$multi_keys[1]][$multi_keys[2]] = $value;
+                        }
                     }
-                    else if (3 == $multi_keys_length)
+
+                    if ($name == $match_key)
                     {
-                        //If the key belongs to a three dimensional array
-                        $concat_admin_options_name[$multi_keys[0]][$multi_keys[1]][$multi_keys[2]] = $value;
+                        //If the key is a base key
+                        $this->settings[$match_key] = $value;
                     }
                 }
-		
-                if ($name == $match_key)
-                {
-                    //If the key is a base key
-                    $concat_admin_options_name[$match_key] = $value;
-		}
             }
 
             return false;
@@ -139,7 +148,7 @@ if(!class_exists('psb_Options'))
             return false;
 	} 
 		
-	function get_custom_roles(&$concat_admin_options_name)
+	function get_custom_roles()
         {
             $wp_roles = new WP_Roles();
             $roles = $wp_roles->get_names();
@@ -152,7 +161,7 @@ if(!class_exists('psb_Options'))
                 {
                     //Creates flag vars that determines which custom roles are selected
                     //Assigns 0 as a default value which means it is not selected
-                    $concat_admin_options_name['custom_roles'][strtolower($value)] = 0;
+                    $this->settings['custom_roles'][strtolower($value)] = 0;
 		}
 
                 return $custom_roles;
@@ -163,10 +172,10 @@ if(!class_exists('psb_Options'))
             }
 	}
 		
-        function generate_type_role_option_name(&$concat_admin_options_name)
+        function generate_type_role_option_name()
         {
-            $custom_roles = $concat_admin_options_name['custom_roles'];
-            $payment_types = $concat_admin_options_name['payment_types'];
+            $custom_roles = $this->settings['custom_roles'];
+            $payment_types = $this->settings['payment_types'];
 
             if (is_array($custom_roles))
             {
@@ -177,16 +186,16 @@ if(!class_exists('psb_Options'))
                     if ($role_status >= 1) // If greater than 1, it means the value comes from x-days fieds which contain number of days.
                     {
                         //If role status is >= 1, it means it is selected
-			//Assigns selected custom roles to selected_custom_roles array
-			$concat_admin_options_name['selected_custom_roles'][] = $role;
+			//Assigns selected custom roles to selected_custom_roles array for later use
+			$this->settings['selected_custom_roles'][] = $role;
 			foreach ($payment_types AS $key => $type_role)
                         {
                             //Creates flag vars that determines which payment type is selected for a particular membership/role type
                             //Example: monthly_silver
-                            $concat_admin_options_name['payment_types'][$key][$key.'_'.$f_role] = 0;
+                            $this->settings['payment_types'][$key][$key.'_'.$f_role] = 0;
                             //Creates vars that hold the amount value for a particular payment type associated with a membership/role type
                             //Example: a_monthly_silver, where "a_" is just a prefix to differentiate the var to those of payment_types array
-                            $concat_admin_options_name['payment_amounts']['a_'.$key.'_'.$f_role] = '';
+                            $this->settings['payment_amounts']['a_'.$key.'_'.$f_role] = '';
 			}
                     }
 		}
@@ -197,10 +206,10 @@ if(!class_exists('psb_Options'))
             }
 	}
 		
-	function create_notify_page(&$aon, &$concat_admin_options_name)
+	function create_notify_page()
         {
             //Only creates page if it doesn't exist
-            if (empty($aon['autoset_ipn_page_ID']) AND 1 == $concat_admin_options_name['autoset_ipn_page'])
+            if (empty($this->settings['autoset_ipn_page_ID']) AND $this->settings['autoset_ipn_page'] == 1)
             {
                 //Creates page data
 		global $current_user;
@@ -228,7 +237,7 @@ if(!class_exists('psb_Options'))
                             );
 
                 //Creates page and assigns the return value(page ID) to autoset_ipn_page_ID
-                $concat_admin_options_name['autoset_ipn_page_ID'] = wp_insert_post($auto_post);
+                $this->settings['autoset_ipn_page_ID'] = wp_insert_post($auto_post);
             }
             else
             {
@@ -266,6 +275,41 @@ if(!class_exists('psb_Options'))
             }
 
             return $random_chars;
+        }
+        
+        function add_customrole()
+        {
+            /**
+             * This function handles the addition of custom roles done by the admin user fromt he 
+             * PSB admin interface.
+             */
+            
+            $role_name = $this->post_vars['role_name'];
+            $role_desc = $this->post_vars['role_desc'];
+            $canread = (bool) $this->post_vars['canread'];
+            $canedit = (bool) $this->post_vars['canedit'];
+            $candelete = (bool) $this->post_vars['candelete'];
+            
+            add_role($role_name, 
+                     ucfirst($role_name), 
+                     array('read' => $canread,
+                           'edit_posts' => $canedit, 
+                           'delete_posts' => $candelete 
+                     )
+            );
+            
+            // Custom roles that are added by the admin from the PSB admin iterface
+            $custom_roles = get_option($this->wp_customroles_handle);
+            
+            $custom_roles[$role_name] = array('desc' => $role_desc,
+                                     'capabilities' => array('read' => $canread, 
+                                                             'edit' => $canedit, 
+                                                             'delete' => $candelete)
+                               );
+            
+            update_option($this->wp_customroles_handle, $custom_roles);
+            
+            return;
         }
     }
 }
