@@ -290,7 +290,7 @@ if(!class_exists('psb_Options'))
             $canedit = ($this->post_vars['canedit'] == 1) ? true : false;
             $candelete = ($this->post_vars['candelete'] == 1) ? true : false;
             
-            add_role($role_name, 
+            add_role(strtolower($role_name), 
                      ucfirst($role_name), 
                      array('read' => $canread,
                            'edit_posts' => $canedit, 
@@ -301,6 +301,18 @@ if(!class_exists('psb_Options'))
             // Custom roles that are added by the admin from the PSB admin iterface
             $custom_roles = get_option($this->wp_customroles_handle);
             
+            $fromdb_custom_roles = $this->get_array_keys($this->settings['custom_roles']);
+            
+            foreach ($custom_roles as $role => $value)
+            {
+                if(in_array($role, $fromdb_custom_roles))
+                {
+                    $temp_ar[$role] =  $value;
+                }
+            }
+            
+            $custom_roles = $temp_ar;
+            
             $custom_roles[$role_name] = array('desc' => $role_desc,
                                      'capabilities' => array('read' => $canread, 
                                                              'edit' => $canedit, 
@@ -310,6 +322,19 @@ if(!class_exists('psb_Options'))
             update_option($this->wp_customroles_handle, $custom_roles);
             
             return;
+        }
+        
+        function get_array_keys($ar)
+        {
+            /**
+             *  Utility funtion that returns the keys of a given array in an array form
+             */
+            
+            foreach ($ar as $key => $value)
+            {
+                $result[] = $key;
+            }
+            return $result;
         }
     }
 }
