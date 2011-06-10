@@ -46,10 +46,10 @@ Here you found the changes in each version.
 
     Version		Date      	Changes
     
-    1.2.2       2011-6-19   Add support for adding custom roles.
-                            Add support for deleting custom roles.
-                            Fix safe-upgrade functionality.
-                            Implement new layout.
+    1.2.2       2011-6-19   Added support for adding custom roles.
+                            Added support for deleting custom roles.
+                            Fixed safe-upgrade functionality.
+                            Implemented the new layout.
                             Few speed optimizations.
     1.2.1       2011-4-27   Fix: Check first if value returned from query for due users is array or not.
                             Fix: Change add_option to update_option for dynamic version update during installation.
