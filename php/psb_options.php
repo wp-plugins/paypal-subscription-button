@@ -8,16 +8,16 @@ if(!class_exists('psb_Options'))
 	
     class psb_Options
     {
-        var $wp_settings_handle = 'psb_admin_options';
-        var $wp_customroles_handle = 'psb_custom_roles';
-        var $wp_lastpostvars_handle = 'psb_last_postvars';
+        var $wp_settings_handle = 'psb_admin_options'; // array handle for general admin settings created via add_option()
+        var $wp_customroles_handle = 'psb_custom_roles'; // array handle for raw custom roles that are created from the psb admin
+        var $wp_lastpostvars_handle = 'psb_last_postvars'; // array handle for last sent general admin settings postvars
 	var $default_roles = array('Administrator', 'Editor', 'Author', 'Contributor', 'Subscriber');
 	var $post_vars = array();
         var $settings = array();
 		
 	function __construct($post_vars = '')
         {
-            $this->post_vars = $post_vars;
+            $this->post_vars = $this->trim_postvars($post_vars);
 	}
 		
 	function get_psb_options()
@@ -65,6 +65,12 @@ if(!class_exists('psb_Options'))
                         $this->post_vars = get_option($this->wp_lastpostvars_handle);
                     }
                     
+                    if ($this->post_vars['deletecustomroles'])
+                    {
+                        $this->delete_customroles();
+                        $this->post_vars = get_option($this->wp_lastpostvars_handle);
+                    }
+                    
                     //Gets and updates the custom roles
                     $this->get_custom_roles();
                   
@@ -77,6 +83,9 @@ if(!class_exists('psb_Options'))
                     
                     //Inserts the final set of options into the wp db
                     update_option($this->wp_settings_handle, $this->settings);
+                    
+                    // update the list of roles for admin display
+                    $this->update_rolefordisplay();
               }
               
               return $this->settings;
@@ -284,57 +293,81 @@ if(!class_exists('psb_Options'))
              * PSB admin interface.
              */
             
-            $role_name = $this->post_vars['role_name'];
-            $role_desc = $this->post_vars['role_desc'];
-            $canread = ($this->post_vars['canread'] == 1) ? true : false;
-            $canedit = ($this->post_vars['canedit'] == 1) ? true : false;
-            $candelete = ($this->post_vars['candelete'] == 1) ? true : false;
-            
-            add_role(strtolower($role_name), 
-                     ucfirst($role_name), 
-                     array('read' => $canread,
-                           'edit_posts' => $canedit, 
-                           'delete_posts' => $candelete 
+            add_role(strtolower($this->post_vars['role_name']), 
+                     ucfirst($this->post_vars['role_name']), 
+                     array('read' => $this->post_vars['canread'],
+                           'edit_posts' => $this->post_vars['canedit'], 
+                           'delete_posts' => $this->post_vars['candelete'] 
                      )
             );
+
+            $raw_customroles = get_option($this->wp_customroles_handle);
             
-            // Custom roles that are added by the admin from the PSB admin iterface
-            $custom_roles = get_option($this->wp_customroles_handle);
+            // append new role to the list
+            $raw_customroles[strtolower($this->post_vars['role_name'])] = array('desc' => $this->post_vars['role_desc'],
+                                                                                      'capabilities' => array('read' => $this->post_vars['canread'], 
+                                                                                                              'edit' => $this->post_vars['canedit'], 
+                                                                                                              'delete' => $this->post_vars['candelete'])
+                                                                                );
             
-            $fromdb_custom_roles = $this->get_array_keys($this->settings['custom_roles']);
-            
-            foreach ($custom_roles as $role => $value)
-            {
-                if(in_array($role, $fromdb_custom_roles))
-                {
-                    $temp_ar[$role] =  $value;
-                }
-            }
-            
-            $custom_roles = $temp_ar;
-            
-            $custom_roles[$role_name] = array('desc' => $role_desc,
-                                     'capabilities' => array('read' => $canread, 
-                                                             'edit' => $canedit, 
-                                                             'delete' => $candelete)
-                               );
-            
-            update_option($this->wp_customroles_handle, $custom_roles);
+            update_option($this->wp_customroles_handle, $raw_customroles);
             
             return;
         }
         
-        function get_array_keys($ar)
+        function delete_customroles()
         {
-            /**
-             *  Utility funtion that returns the keys of a given array in an array form
-             */
+            $wp_roles = new WP_Roles();
             
-            foreach ($ar as $key => $value)
+            $settings = get_option($this->wp_settings_handle);
+            
+            $custom_roles = array_keys($settings['custom_roles']);
+            
+            //update_option('xxx', $custom_roles);
+            
+            foreach ($this->post_vars as $role => $value)
             {
-                $result[] = $key;
+                if ($value == 1)
+                {
+                    if (in_array($role, $custom_roles))
+                    {
+                        $wp_roles->remove_role($role);
+                    }
+                }
             }
-            return $result;
+            
+            return;
+        }
+        
+        function update_rolefordisplay()
+        {   
+            $raw_customroles = get_option($this->wp_customroles_handle);
+            
+            $custom_roles = array_keys($this->settings['custom_roles']);
+
+            foreach ($raw_customroles as $role => $value)
+            {
+                if(in_array($role, $custom_roles))
+                {
+                    $filtered_customroles[$role] =  $value;
+                }
+            }
+
+            update_option($this->wp_customroles_handle, $filtered_customroles);
+                
+            return;
+        }
+        
+        function trim_postvars($postvars)
+        {
+            $trimmed_postvars = array();
+            
+            foreach ($postvars as $key => $value)
+            {
+                $trimmed_postvars[trim($key)] = trim($value);
+            }
+            
+            return $trimmed_postvars;
         }
     }
 }
