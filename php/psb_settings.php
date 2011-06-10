@@ -202,14 +202,18 @@ if (!class_exists('psb_Settings'))
                         <li><span class="title">Membership types</span>
                             <span class="subtitle">Below are the custom roles found in your installation. Tick the ones that will be used.</span>
                             <?php $m_types = $this->option_values['custom_roles'];
-                                  if (is_array($m_types))
+                                  if (is_array($m_types) AND !empty($m_types))
                                   {
                                      foreach ($m_types AS $key => $value)
                                      { ?>
                                         <input type="checkbox" name="<?php echo $key; ?>" value="1" <?php checked('1', $value); ?> />
                                         <label> <?php echo $key; ?> </label> <?php
                                      }
-                                  } ?>
+                                  } 
+                                  else
+                                  { ?>
+                                      <span><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You must create custom roles first...</i></span> <?php
+                                  }?>
                         </li>
                     </ul>
 

@@ -126,7 +126,8 @@ if (!class_exists('psb_Query'))
                                                                                     'txn_id' => $this->post_vars['txn_id'],
                                                                                     'first_name' => $this->post_vars['first_name'],
                                                                                     'last_name' => $this->post_vars['last_name'],
-                                                                                    'payer_email' => $this->post_vars['payer_email']
+                                                                                    'payer_email' => $this->post_vars['payer_email'],
+                                                                                    'ipn' => serialize($this->post_vars)
                                                                                 ));
             if ($affected_rows > 0)
             {

@@ -45,11 +45,14 @@ function psb_install ()
 	  PRIMARY KEY  (cancel_id)
 	) $charset_collate;";
 
-       if (get_option('psb_db_version') != '1.2.0' AND get_option('psb_db_version') != '1.2.1')
+       if (get_option('psb_db_version') !== '1.2.2')
        {
           /*
            * If the db is old which means the plugin is an older version, delete subscr_id columns since they're not needed anymore.
            */
+          
+          $sql .= "ALTER TABLE". $table_name2 ."ADD ipn LONGTEXT(1024) NULL AFTER payer_email";
+           
           $sql .= "ALTER TABLE". $table_name1 ."DROP COLUMN subscr_id;";
           $sql .= "ALTER TABLE". $table_name2 ."DROP COLUMN subscr_id;";
           $sql .= "ALTER TABLE". $table_name3 ."DROP COLUMN subscr_id;";
@@ -65,5 +68,5 @@ function psb_install ()
 function psb_add_options()
 {
     //Add options for admin settings.
-    update_option('psb_db_version', '1.2.1');
+    update_option('psb_db_version', '1.2.2');
 }
