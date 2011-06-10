@@ -364,9 +364,12 @@ if(!class_exists('psb_Options'))
         {
             $trimmed_postvars = array();
             
-            foreach ($postvars as $key => $value)
+            if (is_array($postvars))
             {
-                $trimmed_postvars[trim($key)] = trim($value);
+                foreach ($postvars as $key => $value)
+                {
+                    $trimmed_postvars[trim($key)] = trim($value);
+                }
             }
             
             return $trimmed_postvars;
