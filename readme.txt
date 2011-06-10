@@ -22,6 +22,8 @@ Appeal: If it works click the "Works" button, if it does not work click the "Bro
 * Intuitive and clean backend for configuration
 * Supports sandbox/testing mode
 * Allows sending all IPNs to your email address to monitor every transaction
+* Supports adding/deleting custom roles
+* Allows safe upgrade
 
 == Installation ==
 
@@ -44,6 +46,11 @@ Here you found the changes in each version.
 
     Version		Date      	Changes
     
+    1.2.2       2011-6-19   Add support for adding custom roles.
+                            Add support for deleting custom roles.
+                            Fix safe-upgrade functionality.
+                            Implement new layout.
+                            Few speed optimizations.
     1.2.1       2011-4-27   Fix: Check first if value returned from query for due users is array or not.
                             Fix: Change add_option to update_option for dynamic version update during installation.
     1.2.0       2011-4-11   Add support for buy now button
