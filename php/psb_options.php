@@ -23,25 +23,23 @@ if(!class_exists('psb_Options'))
 	function get_psb_options()
         {
              //Default options
-             $this->settings = array(
-                                            'live' => 0,
-                  			    'currency' => '',
-			                    'merchant_email' => '',
-                                            'notify_email' => '',
-                                            'autoset_ipn_page' => 1,
-                                            'autoset_ipn_page_ID' => '',
-                                            'manual_ipn_page_ID' => '',
-                                            'custom_roles' => array(),
-                                            'selected_custom_roles' => array(),
-                                            'payment_amounts' => array(),
-                                            'payment_types' => array(
-                                                                'weekly' => array(),
-                                                                'monthly' => array(),
-                                                                'yearly' => array(),
-                                                                'one-month' => array(),
-                                                                'one-year' => array(),
-                                                                'x-days' => array()
-                                                               ));
+             $this->settings = array('live' => 0,
+                  	             'currency' => '',
+			             'merchant_email' => '',
+                                     'notify_email' => '',
+                                     'autoset_ipn_page' => 1,
+                                     'autoset_ipn_page_ID' => '',
+                                     'manual_ipn_page_ID' => '',
+                                     'custom_roles' => array(),
+                                     'selected_custom_roles' => array(),
+                                     'payment_amounts' => array(),
+                                     'payment_types' => array('weekly' => array(),
+                                                              'monthly' => array(),
+                                                              'yearly' => array(),
+                                                              'one-month' => array(),
+                                                              'one-year' => array(),
+                                                              'x-days' => array())
+                                );
                          
               //Gets psb_admin_options from the db
               $existing = get_option($this->wp_settings_handle);
@@ -293,22 +291,28 @@ if(!class_exists('psb_Options'))
              * PSB admin interface.
              */
             
-            add_role(strtolower($this->post_vars['role_name']), 
-                     ucfirst($this->post_vars['role_name']), 
-                     array('read' => $this->post_vars['canread'],
-                           'edit_posts' => $this->post_vars['canedit'], 
-                           'delete_posts' => $this->post_vars['candelete'] 
+            $role_name = strtolower($this->post_vars['role_name']);
+            $role_desc = $this->post_vars['role_desc'];
+            $canread = ($this->post_vars['canread'] == 1) ? 1 : 0;
+            $canedit = ($this->post_vars['canedit'] == 1) ? 1 : 0;
+            $candelete = ($this->post_vars['candelete'] == 1) ? 1 : 0;
+            
+            add_role($role_name, 
+                     ucfirst($role_name), 
+                     array('read' => $canread,
+                           'edit_posts' => $canedit, 
+                           'delete_posts' => $candelete 
                      )
             );
 
             $raw_customroles = get_option($this->wp_customroles_handle);
             
             // append new role to the list
-            $raw_customroles[strtolower($this->post_vars['role_name'])] = array('desc' => $this->post_vars['role_desc'],
-                                                                                      'capabilities' => array('read' => $this->post_vars['canread'], 
-                                                                                                              'edit' => $this->post_vars['canedit'], 
-                                                                                                              'delete' => $this->post_vars['candelete'])
-                                                                                );
+            $raw_customroles[$role_name] = array('desc' => $role_desc,
+                                                 'capabilities' => array('read' => $canread, 
+                                                                         'edit' => $canedit, 
+                                                                         'delete' => $candelete)
+                                           );
             
             update_option($this->wp_customroles_handle, $raw_customroles);
             
@@ -322,8 +326,6 @@ if(!class_exists('psb_Options'))
             $settings = get_option($this->wp_settings_handle);
             
             $custom_roles = array_keys($settings['custom_roles']);
-            
-            //update_option('xxx', $custom_roles);
             
             foreach ($this->post_vars as $role => $value)
             {
