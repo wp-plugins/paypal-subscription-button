@@ -96,31 +96,35 @@ if (!class_exists('psb_Settings'))
                             <td class="cr-status-col">Status</td>
                         </tr>
                         
-                        <?php foreach ($this->custom_roles as $role => $value) 
-                        { ?>
-                            <tr>
-                            <td class="cr-blank-col"><input type="checkbox" name="<?php echo $role; ?>" value="1" /></td>
-                            <td><?php echo ucfirst($role); ?></td>
-                            <td><?php echo $value['desc']; ?></td>
-                            <?php
-                            $role = strtolower($role);
-                            $selected_custom_roles = $this->option_values['selected_custom_roles'];
-                            $match = 0;
-                            foreach ($selected_custom_roles as $selected_custom_role)
-                            {
-                                if ($role == strtolower($selected_custom_role))
-                                { 
-                                    $match = 1; ?>
-                                    <td>Active</td> <?php
-                                    continue;
-                                }
-                            } 
-                            if ($match == 0)
+                        <?php 
+                        if (is_array($this->custom_roles))
+                        {
+                            foreach ($this->custom_roles as $role => $value) 
                             { ?>
-                                <td>Inctive</td> <?php
-                            } ?>
-                        </tr> <?php
-                        } ?> 
+                                <tr>
+                                <td class="cr-blank-col"><input type="checkbox" name="<?php echo $role; ?>" value="1" /></td>
+                                <td><?php echo ucfirst($role); ?></td>
+                                <td><?php echo $value['desc']; ?></td>
+                                <?php
+                                $role = strtolower($role);
+                                $selected_custom_roles = $this->option_values['selected_custom_roles'];
+                                $match = 0;
+                                foreach ($selected_custom_roles as $selected_custom_role)
+                                {
+                                    if ($role == strtolower($selected_custom_role))
+                                    { 
+                                        $match = 1; ?>
+                                        <td>Active</td> <?php
+                                        continue;
+                                    }
+                                } 
+                                if ($match == 0)
+                                { ?>
+                                    <td>Inctive</td> <?php
+                                } ?>
+                            </tr> <?php
+                            } 
+                        }?> 
                     </table>
                     <span><input type="submit" class="button-primary" value="<?php _e('Delete Role(s)') ?>" /></span>                
                 </form>
