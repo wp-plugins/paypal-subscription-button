@@ -89,7 +89,7 @@ if (!class_exists("psb_IPN") )
         {
             // send notification to notification email address
 
-            $from = $_SERVER['SERVER_NAME'];
+            $from = $_SERVER['SERVER_NAME'] . "\n";
             $send_to = $this->admin_options['notify_email'];
             $reply_to = 'none';
             $subject = 'Paypal IPN';
