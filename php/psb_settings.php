@@ -145,7 +145,7 @@ if (!class_exists('psb_Settings'))
                         <ul class="cr-ul">
                             <li><span class="subtitle privileges-title">Choose if a user can read, edit, and delete posts.</span></li>
                             <ul class="cr-ul privileges">
-                                <li><input type="checkbox" name="canread" value="1" /><span>Read</span></li>
+                                <li><input type="checkbox" name="canread" value="1" disabled="disabled" checked="checked"/><span>Read</span></li>
                                 <li><input type="checkbox" name="canedit" value="1"  /><span>Edit</span></li>
                                 <li><input type="checkbox" name="candelete" value="1" /><span>Delete</span></li>
                                 <p class="submit">
