@@ -3,7 +3,7 @@ Contributors: adred
 Tags:  subscription plugin, membership plugin, paypal plugin, paypal, subscription, membership, subscription button, paypal button, recurring payment, paypal subscription
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 
 == Description ==
 
@@ -85,4 +85,5 @@ Here you found the changes in each version.
 
 == Screenshots ==
 1. Plugin Dashboard. Bigger: <http://dl.dropbox.com/u/14483154/screenshot-1.jpg>
+1. New Plugin Dashboard. Bigger: <http://dl.dropbox.com/u/14483154/screenshot-2.jpg>
 
