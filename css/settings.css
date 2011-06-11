@@ -1,0 +1,162 @@
+/**** DIVISIONS ****/
+
+.wrap {
+	padding-left: 25px;
+}
+
+#icon-options-general {
+	margin-left: -20px;
+}
+
+#notify-update {
+	background: #FFFFE0;
+	border: 1px solid #E6DB55;
+	margin: 10px 0 0 -20px;
+	padding: 7px 0 0 10px;
+	height: 23px;
+}
+
+ul {
+	margin-top: 20px;
+}
+
+ul li span.subtitle {
+	display: block;
+	margin: 15px 0 3px;
+	font-size: 12px;
+}
+
+ul li span.title {
+	display: block;
+	margin-top: 20px;
+}
+
+ul.subtitle-margin li span.subtitle {
+	margin-bottom: 7px;
+}
+
+ul.input-align li input {
+	margin: 0 0 0 25px;
+}
+
+ul.p-options li label {
+	margin: 0 25px 0 0 ;
+}
+
+ul.cell-align li table tr td {
+	width: 100px;
+	padding: 1px;
+}
+
+ul.cell-align li table tr td:last-child {
+	width: 170px;
+	padding: 1px;
+}
+
+ul.cell-align li table {
+	margin: 0 0 0 25px;
+}
+
+/**** TYPOGRAPHY ****/
+
+ul.cell-align li span.p-options-title {
+	color:  #191919;
+	font-style: italic;
+}
+
+ul li span.title {
+	color: #191919;
+	font-size: 15px;
+	font-style: italic;
+}
+
+/**** New CSS for version 1.2.2 ****/
+
+form {
+    margin: 25px 0;
+}
+
+.cr-title {
+    color: #191919;
+    font-size: 15px;
+    font-style: italic;
+}
+
+#cr-table {
+    border-spacing: 0;
+    background: white;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #DFDFDF;
+    border-top: none;
+    margin: 10px 0 6px;
+}
+
+tr#cr-heading {
+    background: url(../images/th.png) repeat-x;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+#cr-table td {
+    padding: 6px 10px;
+    border-top: 1px solid #DFDFDF;
+}
+
+td.cr-blank-col {
+    width: 25px;
+}
+
+td.cr-name-col {
+    width: 100px;
+}
+
+td.cr-desc-col {
+    width: 600px;
+}
+
+td.cr-status-col {
+    width: 80px;
+}
+
+form#add-custom-roles {
+    margin: 25px 0 0;
+}
+
+.cr-ul {
+    margin-left: 25px !important;
+}
+
+.cr-ul li {
+    margin-bottom: 10px !important;
+}
+
+.cr-ul li input {
+    margin: 0 0 0 10px !important;
+}
+
+.privileges li input {
+    margin: 0 5px 0 0 !important;
+}
+
+.privileges {
+    margin-top: 15px;
+}
+
+.privileges li {
+    display: inline;
+    margin-right: 40px;
+}
+
+form#psb-options {
+    margin: 25px 0;
+    background: white;
+    padding: 10px 0 0 25px;
+    width: 862px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #DFDFDF;
+}
