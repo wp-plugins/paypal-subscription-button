@@ -4,7 +4,7 @@
  * Plugin URI: http://goo.gl/Xfb8V
  * Description: Integrates Paypal Subscription and Buy Now button into Wordpress. This plugin is primarily for membership sites.
  * Author: Red Adaya
- * Version: 1.2.2-beta
+ * Version: 1.2.2
  * Author URI: http://goo.gl/Xfb8V
  */
  
