@@ -138,7 +138,7 @@ if (!class_exists('psb_PSB'))
                 }
                 else
                 {
-                    $this->psb_ipn->notify("Bad order (PayPal says it's invalid).");
+                    $this->psb_ipn->notify("Bad order (PayPal says it's invalid). Add/remove 'paypal' subdomain in your button code or switch to sandbox/live in the settings.");
                     return;
 		} 
             }
@@ -182,7 +182,7 @@ if (!class_exists('psb_PSB'))
 			
             if ($receiver_email != $this->paypal_email OR $mc_currency != $this->currency)
             {
-            	return "Someone attempted a sale using a manipulated URL";
+            	return "Someone attempted a sale using a manipulated URL. If you are testing, check your merchant email address if it's correct.";
             }
 			
             // get final payment type. e.g. monthly
@@ -197,7 +197,7 @@ if (!class_exists('psb_PSB'))
 													
             if ($this->psb_query->transact_id_exists() OR $this->psb_query->wp_user_id_exists())
             {
-		return "This was NOT a successful transaction due to duplicate txn_id/user_id";
+		return "This was NOT a successful transaction due to duplicate txn_id/user_id. Try another account because the one you're using is already paying.";
             }
 										
             // register current transaction
@@ -207,7 +207,7 @@ if (!class_exists('psb_PSB'))
 											
             if (!$trans_reg_result OR !$subscr_reg_result)
             {
-                return "This was NOT a successful transaction due to database query issues.";
+                return "This was NOT a successful transaction due to database query issues. Pls notify the developer ASAP!!!";
             }
 			
             //set the user's role to $membership_type. e.g. gold
@@ -225,7 +225,7 @@ if (!class_exists('psb_PSB'))
             }
             else
             {
-                return "Subscription has (been) $subscr_status but failed to update and log.";
+                return "Subscription has (been) $subscr_status but failed to update and log. Pls notify the developer ASAP!!!";
             }
 	}
 		
