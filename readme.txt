@@ -32,14 +32,14 @@ Note: This plugin requires User Access Manager(UAM) plugin to work.
 
 1. Download and extract into wp-content/plugin directory.
 1. Download User Access Manager Plugin and install.
-1. Create custom roles. There are plugins out there for this or you can do it manually( visit <http://goo.gl/Xfb8V> for details ).
-1. Create user group names or membership levels and assign them to your custom roles. This is handled via GUI using user access manager.
+1. Create custom roles.
+1. Create user group names or membership levels and assign them to your custom roles. This is handled via GUI using User Access Manager. Go to <http://goo.gl/Xfb8V> for details.
 1. Activate psb plugin and fill out the settings form.
-1. Login to paypal and setup your IPN. Make sure to use the link to the page which the plugin has generated as the IPN url( visit <http://goo.gl/Xfb8V> for details ).
-1. Create a subscription button, hosted or not hosted.
+1. Login to paypal and setup your IPN. Make sure to use the link to the page which the plugin has generated as the IPN url(visit <http://goo.gl/Xfb8V> for details).
+1. Create a subscription/buy-now button.
 1. Embed the code anywhere in your theme as long as it's inside the loop.
 1. Insert a hidden input with the current_user_id as the value. Go to <http://goo.gl/Xfb8V> for details.
-1. That's all it! When you create a post or page, just assign it to a membership level you created using user access manager.
+1. That's all it! When you create a post or page, just assign it to a membership level.
 
 == Changelog ==
 
