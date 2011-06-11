@@ -89,10 +89,10 @@ if (!class_exists("psb_IPN") )
         {
             // send notification to notification email address
 
-            $from = 'Paypal';
+            $from = $_SERVER['SERVER_NAME'];
             $send_to = $this->admin_options['notify_email'];
             $reply_to = 'none';
-            $subject = 'paypay_ipn notification';
+            $subject = 'Paypal IPN';
             $message = "\n\nThe following data was received from PayPal:\n\n";
             foreach ($this->post_vars AS $key => $value)
             {
@@ -100,7 +100,7 @@ if (!class_exists("psb_IPN") )
             }
 
             // email header
-            $em_headers  = "From: $from <$this->admin_options['notify_email']>\n";
+            $em_headers  = "From: $from";
             $em_headers .= "Reply-To: $reply_to \n";
             $em_headers .= "X-Priority: 3\n";
 			
