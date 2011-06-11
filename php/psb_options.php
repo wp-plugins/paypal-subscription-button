@@ -293,7 +293,7 @@ if(!class_exists('psb_Options'))
             
             $role_name = strtolower($this->post_vars['role_name']);
             $role_desc = $this->post_vars['role_desc'];
-            $canread = ($this->post_vars['canread'] == 1) ? 1 : 0;
+            $canread = 1; // A role must always have a "Read" capability
             $canedit = ($this->post_vars['canedit'] == 1) ? 1 : 0;
             $candelete = ($this->post_vars['candelete'] == 1) ? 1 : 0;
             
