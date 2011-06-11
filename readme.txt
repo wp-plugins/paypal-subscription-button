@@ -23,6 +23,7 @@ Appeal: If it works click the "Works" button, if it does not work click the "Bro
 * Supports sandbox/testing mode
 * Allows sending all IPNs to your email address to monitor every transaction
 * Supports adding/deleting custom roles
+* Displays dynamic list of custom roles within a table
 * Allows safe upgrade
 
 == Installation ==
@@ -49,7 +50,7 @@ Here you found the changes in each version.
     1.2.2       2011-6-19   Added support for adding custom roles.
                             Added support for deleting custom roles.
                             Fixed safe-upgrade functionality.
-                            Implemented the new layout.
+                            Added table which displays dynamic list of custom roles.
                             Few speed optimizations.
     1.2.1       2011-4-27   Fix: Check first if value returned from query for due users is array or not.
                             Fix: Change add_option to update_option for dynamic version update during installation.
