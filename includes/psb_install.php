@@ -4,17 +4,18 @@
  * The tables are designed to allow a user to have multiple transaction. Not enabled (as of now) in psb_PSB class.
  */
 
-function psb_install ()
+function psb_install()
 {
    global $wpdb;
    
-   $new_version = '1.2.2';
+   $new_version = '1.2.3';
    $current_version = get_option('psb_version');
-   $version_flag = 0;
+   $old_version_name = get_option('psb_db_version');
    
    $table_name1 = $wpdb->prefix . "psb_members";
    $table_name2 = $wpdb->prefix . "psb_transactions";
-   $table_name3 = $wpdb->prefix . "psb_cancelled";
+   $table_name3 = $wpdb->prefix . "psb_ended";
+   $table_old_name3 = $wpdb->prefix . "psb_cancelled";
    
    $sql = "CREATE TABLE " . $table_name1 . " (
 	  member_id int(20) unsigned NOT NULL auto_increment,
@@ -49,7 +50,7 @@ function psb_install ()
    
    if ( $wpdb->get_var("show tables like '$table_name1'") != $table_name1
         AND $wpdb->get_var("show tables like '$table_name2'") != $table_name2
-        AND $wpdb->get_var("show tables like '$table_name3'") != $table_name3 )
+        AND ($wpdb->get_var("show tables like '$table_name3'") != $table_name3 OR $wpdb->get_var("show tables like '$table_old_name3'") != $table_old_name3))
    {
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         dbDelta($sql);
@@ -58,30 +59,44 @@ function psb_install ()
    {
        if ($current_version !== $new_version OR empty($current_version))
        {
-          /*
-           * If the db is old which means the plugin is an older version, delete subscr_id columns since they're not needed anymore.
-           */
-          
-          $sql .= "ALTER TABLE". $table_name2 ."ADD ipn LONGTEXT NULL";
-          
-          if ($current_version == '1.2.0')
+          if ($current_version === '1.2.2')
           {
-              $sql .= "ALTER TABLE". $table_name1 ."DROP COLUMN subscr_id;";
-              $sql .= "ALTER TABLE". $table_name2 ."DROP COLUMN subscr_id;";
-              $sql .= "ALTER TABLE". $table_name3 ."DROP COLUMN subscr_id;";
+              // rename table_name3 in all previous versions           
+              $sql .= "RENAME TABLE" . $table_old_name3 . "to" . $table_name3 . "";
           }
           
-          update_option('psb_version', $new_version);
+          if(!empty($old_version_name))
+          {
+              // add ipn column for 1.2.1
+              if ($old_version_name === '1.2.1') 
+              {
+                  // rename table_name3 in all previous versions           
+                  $sql .= "RENAME TABLE" . $table_old_name3 . "to" . $table_name3 . "";
+                  // add ipn column to table_name2
+                  $sql .= "ALTER TABLE". $table_name2 ."ADD ipn LONGTEXT NULL";
+              }
+              
+              // drop subscr_id column for 1.2.0
+              if ($old_version_name === '1.2.0')
+              {
+                  // rename table_name3 in all previous versions           
+                  $sql .= "RENAME TABLE" . $table_old_name3 . "to" . $table_name3 . "";
+                  // add ipn column to table_name2
+                  $sql .= "ALTER TABLE". $table_name2 ."ADD ipn LONGTEXT NULL";
+                  // drop subscr_id column from all tables
+                  $sql .= "ALTER TABLE". $table_name1 ."DROP COLUMN subscr_id;";
+                  $sql .= "ALTER TABLE". $table_name2 ."DROP COLUMN subscr_id;";
+                  $sql .= "ALTER TABLE". $table_name3 ."DROP COLUMN subscr_id;";
+              }
+              // delete option psb_db_version because it's not needed anymore
+              delete_option('psb_db_version');
+          }
           
-          $version_flag = 1;  
+          // update or set to new version
+          update_option('psb_version', $new_version);
           
           require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
           dbDelta($sql);
        }
-   }
-
-   if (!$version_flag)
-   {
-        update_option('psb_version', $new_version);
    }
 }
