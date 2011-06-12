@@ -33,7 +33,7 @@ if (!class_exists('psb_Query'))
             //Tell wordpress about the custom tables.
             $wpdb->psb_members = $wpdb->prefix . 'psb_members';
             $wpdb->psb_transactions = $wpdb->prefix . 'psb_transactions';
-            $wpdb->psb_cancelled = $wpdb->prefix . 'psb_cancelled';
+            $wpdb->psb_ended = $wpdb->prefix . 'psb_ended';
 	}
 		
 	function sanitize_postvars(&$post_vars)
@@ -174,7 +174,7 @@ if (!class_exists('psb_Query'))
             }
             
             $current_time = date('Y-m-d H:i:s');
-            $affected_rows = $this->wpdb->insert($this->wpdb->psb_cancelled, array('wp_user_id' => $id, 'date' => $current_time));
+            $affected_rows = $this->wpdb->insert($this->wpdb->psb_ended, array('wp_user_id' => $id, 'date' => $current_time));
 
             if ($affected_rows > 0)
             {
