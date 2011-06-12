@@ -83,7 +83,7 @@ if(!class_exists('psb_Options'))
                     update_option($this->wp_settings_handle, $this->settings);
                     
                     // update the list of roles for admin display
-                    $this->update_rolefordisplay();
+                    $this->update_roles_list();
               }
               
               return $this->settings;
@@ -341,8 +341,13 @@ if(!class_exists('psb_Options'))
             return;
         }
         
-        function update_rolefordisplay()
+        function update_roles_list()
         {   
+            /**
+             *  Function that checks the roles in psb_custom_roles against the custom roles 
+             *  in the settings and returns them in an array to be displayed in the admin interface.
+             */
+            
             $raw_customroles = get_option($this->wp_customroles_handle);
             
             $custom_roles = array_keys($this->settings['custom_roles']);
