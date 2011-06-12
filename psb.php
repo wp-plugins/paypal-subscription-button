@@ -9,7 +9,7 @@
  */
  
 /*
- * Copyright (C) 2010-2011 Red Joba Adaya, probingcoder.drupalgardens.com
+ * Copyright (C) 2010-2011 Redeye Joba Adaya, probingcoder.drupalgardens.com
  *	
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,7 +43,18 @@ if (!class_exists('psb_PSB'))
 {
 	
     class psb_PSB
-    {
+    {   
+        var $manipulated = 'Someone attempted a sale using a manipulated URL. If you are testing, check your merchant email address if it\'s correct.
+                            Or see if you are in testing mode but your button code is for production.';
+        var $no_mp_type = 'The plugin detected that there\'s no payment and membership type created.' ;
+        var $duplicate_user = 'Someone who is already a subsriber tried to pay. If you are testing, use another account.';
+        var $query_issues = 'There were database query issues while processing the transaction. Please notify the developer ASAP!!!';
+        var $success = 'Transaction processing was successful. You have a new subscriber!';
+        var $ended = 'Transaction has been cancelled or has expired.';
+        var $failed_log = 'Transaction has been cancelled or has expired but failed to log. Please notify the developer ASAP!!!';
+        var $bad_order = 'Bad order. If you are testing, make sure the button code is for testing. Otherwise, make sure it is for production.';
+        var $no_status_and_txn = 'Unknown Payment Status and Transaction Type.';
+        
 	var $post_vars;
 	var $admin_options;
 	var $wp_user_obj;
@@ -99,7 +110,7 @@ if (!class_exists('psb_PSB'))
 					
                     if ($this->is_empty_string($payment_status) AND $this->is_empty_string($txn_type))
                     {
-                        $this->psb_ipn->notify("Unknown Payment Status and Transaction Type.");
+                        $this->psb_ipn->notify($this->no_status_and_txn);
 			return;
                     }
 					
@@ -125,11 +136,11 @@ if (!class_exists('psb_PSB'))
 						
                     if ($txn_type == "subscr_cancel")
                     {
-                        $this->psb_ipn->notify($this->process_end('cancelled'));
+                        $this->psb_ipn->notify($this->process_ended('cancelled'));
                     }
                     else if ($txn_type == "subscr_eot")
                     {
-                        $this->psb_ipn->notify($this->process_end('expired'));
+                        $this->psb_ipn->notify($this->process_ended('expired'));
                     }
                     else if ($txn_type == "subscr_signup")
                     {
@@ -138,7 +149,7 @@ if (!class_exists('psb_PSB'))
                 }
                 else
                 {
-                    $this->psb_ipn->notify("Bad order (PayPal says it's invalid). Add/remove 'paypal' subdomain in your button code or switch to sandbox/live in the settings.");
+                    $this->psb_ipn->notify($this->bad_order);
                     return;
 		} 
             }
@@ -182,7 +193,7 @@ if (!class_exists('psb_PSB'))
 			
             if ($receiver_email != $this->paypal_email OR $mc_currency != $this->currency)
             {
-            	return "Someone attempted a sale using a manipulated URL. If you are testing, check your merchant email address if it's correct.";
+            	return $this->manipulated;
             }
 			
             // get final payment type. e.g. monthly
@@ -192,12 +203,12 @@ if (!class_exists('psb_PSB'))
 			
             if ($this->is_empty_string($payment_type) OR $this->is_empty_string($membership_type))
             {
-		return "NULL payment_type & membership_type";
+		return $this->no_mp_type;
             }
 													
             if ($this->psb_query->transact_id_exists() OR $this->psb_query->wp_user_id_exists())
             {
-		return "This was NOT a successful transaction due to duplicate txn_id/user_id. Try another account because the one you're using is already paying.";
+		return $this->duplicate_user;
             }
 										
             // register current transaction
@@ -207,25 +218,25 @@ if (!class_exists('psb_PSB'))
 											
             if (!$trans_reg_result OR !$subscr_reg_result)
             {
-                return "This was NOT a successful transaction due to database query issues. Pls notify the developer ASAP!!!";
+                return $this->query_issues;
             }
 			
             //set the user's role to $membership_type. e.g. gold
             $this->wp_user_obj->set_role($membership_type);
-            return "This was a successful transaction";
+            return $this->success;
 	}
 		
-	function process_end($subscr_status)
+	function process_ended($subscr_status)
         {
             $this->wp_user_obj->set_role( 'subscriber' );
 
             if ($this->psb_query->update_status($subscr_status) AND $this->psb_query->log_end())
             {
-                return "Subscription has (been) $subscr_status.";
+                return $this->ended;
             }
             else
             {
-                return "Subscription has (been) $subscr_status but failed to update and log. Pls notify the developer ASAP!!!";
+                return $this->failed_log;
             }
 	}
 		
