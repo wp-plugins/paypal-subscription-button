@@ -1,13 +1,13 @@
 === Paypal Subscription Button ===
 Contributors: adred
-Tags:  paypal plugin for wordpress, paypal plugin, subscription plugin, membership plugin, membership plugin for wordpress, buy-now button plugin, paypal, subscription, membership, subscription button, paypal button, recurring payment, paypal subscription, buy-now button
+Tags:  paypal plugin for wordpress, paypal plugin, subscription plugin, membership plugin, membership plugin for wordpress, paypal, subscription, membership, subscription button, paypal button, recurring payment, paypal subscription, buy now button, paypal buy now button
 Requires at least: 3.0
 Tested up to: 3.1.1
 Stable tag: 1.2.2
 
 == Description ==
 
-Paypal Subscription Button is a paypal plugin for Wordpress. It integrates paypal Subscription and Buy Now button into Wordpress. This plugin is primarily for membership sites, which means, you can use this with other membership plugins.
+Paypal Subscription Button is a paypal plugin for Wordpress. It integrates paypal Subscription button and paypal Buy Now button into Wordpress. This plugin is primarily for membership sites, which means, you can use this with other membership plugins.
 
 I created this plugin because I couldn't find a paypal plugin that integrates and works well and FREE. So far, all of the membership plugins for Wordpress I tested are broken. :-) I hope this one will finally end the agony of the people who seek the same functionality as me.
 
