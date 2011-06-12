@@ -17,6 +17,4 @@ function psb_uninstall()
     //$wpdb->query("DROP TABLE IF EXISTS $table_name1");
     //$wpdb->query("DROP TABLE IF EXISTS $table_name2");
     //$wpdb->query("DROP TABLE IF EXISTS $table_name3");
-
-    delete_option('psb_version');
 }
