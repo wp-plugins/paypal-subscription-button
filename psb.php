@@ -53,7 +53,7 @@ if (!class_exists('psb_PSB'))
         var $ended = 'Transaction has been cancelled or has expired.';
         var $failed_log = 'Transaction has been cancelled or has expired but failed to log. Please notify the developer ASAP!!!';
         var $bad_order = 'Bad order. If you are testing, make sure the button code is for testing. Otherwise, make sure it is for production.';
-        var $no_status_and_txn = 'Unknown Payment Status and Transaction Type.';
+        var $no_status_and_txn = 'Unknown Payment Status and Transaction Type. Someone attempted a sale using a manipulated URL';
         
 	var $post_vars;
 	var $admin_options;
