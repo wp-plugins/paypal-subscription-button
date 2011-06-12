@@ -162,7 +162,7 @@ if (!class_exists('psb_Query'))
             }
         }
 		
-        function log_end($user_id = '')
+        function log_ended($user_id = '')
         {
             if ($user_id != '')
             {
