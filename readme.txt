@@ -1,6 +1,6 @@
 === Paypal Subscription Button ===
 Contributors: adred
-Tags:  paypal plugin for wordpress, paypal plugin, subscription plugin, membership plugin, paypal plugin, paypal, subscription, membership, subscription button, paypal button, recurring payment, paypal subscription
+Tags:  paypal plugin for wordpress, paypal plugin, subscription plugin, membership plugin, membership plugin for wordpress, buy-now button plugin, paypal, subscription, membership, subscription button, paypal button, recurring payment, paypal subscription, buy-now button
 Requires at least: 3.0
 Tested up to: 3.1.1
 Stable tag: 1.2.2
@@ -21,10 +21,10 @@ Appeal: If it works click the "Works" button, if it does not work click the "Bro
 * Uses Wordpress cron to automatically check members status who are subscribed to one time payment
 * Intuitive and clean backend for configuration
 * Supports sandbox/testing mode
-* Allows sending all IPNs to your email address to monitor every transaction
 * Supports adding/deleting custom roles
 * Displays dynamic list of custom roles within a table
-* Allows safe upgrade
+* Safe to upgrade
+* Sends all IPNs to your email address to monitor every transaction
 
 == Installation ==
 
