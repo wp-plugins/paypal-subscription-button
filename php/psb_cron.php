@@ -51,7 +51,7 @@ if (!class_exists('psb_Cron'))
                     //Update user status in the db.
                     $this->psb_query->update_status('expired', $value);
                     //Log the end of subscription.
-                    $this->psb_query->log_end($value);
+                    $this->psb_query->log_ended($value);
                 }
             }
         }
