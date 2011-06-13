@@ -3,7 +3,7 @@ Contributors: adred
 Tags:  paypal plugin for wordpress, paypal plugin, subscription plugin, membership plugin, membership plugin for wordpress, paypal, subscription, membership, subscription button, paypal button, recurring payment, paypal subscription, buy now button, paypal buy now button
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.2.2
+Stable tag: 1.2.2.1
 
 == Description ==
 

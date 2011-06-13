@@ -4,7 +4,7 @@
  * Plugin URI: http://goo.gl/Xfb8V
  * Description: PSB is a paypal plugin for WordPress with which you can implement one time and recurring payments using Subscription and Buy Now button respectively.
  * Author: Redeye Joba Adaya
- * Version: 1.2.2
+ * Version: 1.2.2.1
  * Author URI: http://goo.gl/Xfb8V
  */
  
