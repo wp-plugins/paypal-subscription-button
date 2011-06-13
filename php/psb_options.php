@@ -297,24 +297,27 @@ if(!class_exists('psb_Options'))
             $canedit = ($this->post_vars['canedit'] == 1) ? 1 : 0;
             $candelete = ($this->post_vars['candelete'] == 1) ? 1 : 0;
             
-            add_role($role_name, 
-                     ucfirst($role_name), 
-                     array('read' => $canread,
-                           'edit_posts' => $canedit, 
-                           'delete_posts' => $candelete 
-                     )
-            );
+            if (!empty($role_name) AND !empty($role_desc))
+            {
+                add_role($role_name, 
+                         ucfirst($role_name), 
+                         array('read' => $canread,
+                               'edit_posts' => $canedit, 
+                               'delete_posts' => $candelete 
+                         )
+                );
 
-            $raw_customroles = get_option($this->wp_customroles_handle);
-            
-            // append new role to the list
-            $raw_customroles[$role_name] = array('desc' => $role_desc,
-                                                 'capabilities' => array('read' => $canread, 
-                                                                         'edit' => $canedit, 
-                                                                         'delete' => $candelete)
-                                           );
-            
-            update_option($this->wp_customroles_handle, $raw_customroles);
+                $raw_customroles = get_option($this->wp_customroles_handle);
+
+                // append new role to the list
+                $raw_customroles[$role_name] = array('desc' => $role_desc,
+                                                     'capabilities' => array('read' => $canread, 
+                                                                             'edit' => $canedit, 
+                                                                             'delete' => $candelete)
+                                               );
+
+                update_option($this->wp_customroles_handle, $raw_customroles);
+            }
             
             return;
         }
