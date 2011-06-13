@@ -3,13 +3,13 @@
  * Plugin Name: Paypal Subscription Button
  * Plugin URI: http://goo.gl/Xfb8V
  * Description: PSB is a paypal plugin for WordPress. You can implement one time and recurring payments using Subscription and Buy Now button respectively with this plugin.
- * Author: Red Adaya
+ * Author: Redeye Joba Adaya
  * Version: 1.2.2
  * Author URI: http://goo.gl/Xfb8V
  */
  
 /*
- * Copyright (C) 2010-2011 Red Joba Adaya, probingcoder.drupalgardens.com
+ * Copyright (C) 2010-2011 Redeye Joba Adaya, probingcoder.drupalgardens.com
  *	
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
