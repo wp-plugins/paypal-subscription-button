@@ -3,7 +3,7 @@ Contributors: adred
 Tags:  paypal plugin for wordpress, paypal plugin, subscription plugin, membership plugin, membership plugin for wordpress, paypal, subscription, membership, subscription button, paypal button, recurring payment, paypal subscription, buy now button, paypal buy now button
 Requires at least: 3.0
 Tested up to: 3.1.1
-Stable tag: 1.2.2
+Stable tag: 1.2.2.1
 
 == Description ==
 
@@ -47,7 +47,9 @@ Here you found the changes in each version.
 
     Version		Date      	Changes
     
-    1.2.2       2011-6-19   Added support for adding custom roles.
+    1.2.2.1     2011-6-13   Fixed: Do not allow adding roles when role_name and role_desc are emtpy
+                            Fixed: Use site name as the sender of the notification email
+    1.2.2       2011-6-11   Added support for adding custom roles.
                             Added support for deleting custom roles.
                             Fixed safe-upgrade functionality.
                             Added table which displays dynamic list of custom roles.
