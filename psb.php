@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Paypal Subscription Button
  * Plugin URI: http://goo.gl/Xfb8V
- * Description: Paypal Subscription Button is a paypal plugin for WordPress. It integrates paypal Subscription button and paypal Buy Now button into WordPress. This plugin is primarily for membership sites, which means, you can use this with other membership plugins.
+ * Description: Paypal Subscription Button is a paypal plugin for WordPress. It integrates paypal Subscription button and paypal Buy Now button into WordPress. You can implement recurring payments and one time payments using this plugin. This is primarily for membership sites and you can use this together with other membership plugins.
  * Author: Red Adaya
  * Version: 1.2.2
  * Author URI: http://goo.gl/Xfb8V
