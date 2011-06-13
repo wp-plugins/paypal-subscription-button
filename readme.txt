@@ -47,7 +47,9 @@ Here you found the changes in each version.
 
     Version		Date      	Changes
     
-    1.2.2       2011-6-19   Added support for adding custom roles.
+    1.2.2.1     2011-6-13   Fixed: Do not allow adding roles when role_name and role_desc are emtpy
+                            Fixed: Use site name as the sender of the notification email
+    1.2.2       2011-6-11   Added support for adding custom roles.
                             Added support for deleting custom roles.
                             Fixed safe-upgrade functionality.
                             Added table which displays dynamic list of custom roles.
