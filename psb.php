@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Paypal Subscription Button
  * Plugin URI: http://goo.gl/Xfb8V
- * Description: Paypal Subscription Button is a paypal plugin for WordPress. You can implement recurring payments using subscription button and one time payments using Buy Now button with this plugin.
+ * Description: PSB is a paypal plugin for WordPress. You can implement one time and recurring payments using Subscription and Buy Now button respectively with this plugin.
  * Author: Red Adaya
  * Version: 1.2.2
  * Author URI: http://goo.gl/Xfb8V
