@@ -109,9 +109,9 @@ if (!class_exists("psb_IPN") )
             return;
 	}
 
-        function temp_email($message)
+        function temp_email()
         {
-            mail('adred.signup@gmail.com', 'Cron Testing', $_SERVER['SERVER_NAME'] . $message, '');
+            mail('adred.signup@gmail.com', 'Cron Testing', $_SERVER['SERVER_NAME']);
         }
 
 	function get_paypal_url() 

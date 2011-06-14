@@ -35,8 +35,6 @@ if (!class_exists('psb_Cron'))
 
         function update_member_status()
         {
-            $this->psb_ipn->temp_email('Yay! Cron is working!');
-
             //Get the wp user id of users who are due.
             $this->result = $this->psb_query->get_due_users();
             
@@ -45,6 +43,7 @@ if (!class_exists('psb_Cron'))
                 foreach ($this->result as $value)
                 {
                     $this->wp_user_obj = new WP_User($value);
+                    $this->psb_ipn->temp_email();
 
                     //Deactive user subscription.
                     $this->wp_user_obj->set_role('subscriber');
