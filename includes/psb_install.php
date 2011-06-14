@@ -8,8 +8,9 @@ function psb_install ()
 {
    global $wpdb;
    
-   $new_version = '1.2.2';
+   $new_version = '1.2.2.1';
    $current_version = get_option('psb_version');
+   $old_version = get_option('psb_db_version');
    $version_flag = 0;
    
    $table_name1 = $wpdb->prefix . "psb_members";
@@ -62,26 +63,26 @@ function psb_install ()
            * If the db is old which means the plugin is an older version, delete subscr_id columns since they're not needed anymore.
            */
           
-          $sql .= "ALTER TABLE". $table_name2 ."ADD ipn LONGTEXT NULL";
-          
-          if ($current_version == '1.2.0')
+          if (!empty($old_version))
           {
-              $sql .= "ALTER TABLE". $table_name1 ."DROP COLUMN subscr_id;";
-              $sql .= "ALTER TABLE". $table_name2 ."DROP COLUMN subscr_id;";
-              $sql .= "ALTER TABLE". $table_name3 ."DROP COLUMN subscr_id;";
+              if ($old_version === '1.2.1')
+              {
+                $sql .= "ALTER TABLE". $table_name2 ."ADD ipn LONGTEXT NULL";
+              }
+
+              if ($old_version === '1.2.0')
+              {
+                  $sql .= "ALTER TABLE". $table_name2 ."ADD ipn LONGTEXT NULL";
+                  $sql .= "ALTER TABLE". $table_name1 ."DROP COLUMN subscr_id;";
+                  $sql .= "ALTER TABLE". $table_name2 ."DROP COLUMN subscr_id;";
+                  $sql .= "ALTER TABLE". $table_name3 ."DROP COLUMN subscr_id;";
+              }
           }
           
           update_option('psb_version', $new_version);
-          
-          $version_flag = 1;  
-          
+                   
           require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
           dbDelta($sql);
        }
-   }
-
-   if (!$version_flag)
-   {
-        update_option('psb_version', $new_version);
    }
 }
