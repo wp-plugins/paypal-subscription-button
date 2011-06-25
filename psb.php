@@ -261,7 +261,7 @@ if (class_exists('psb_PSB'))
          * Initiate plugin activation
          */
         
-        //Installs custom database tables.
+    //Installs custom database tables.
 	register_activation_hook(__FILE__,'psb_install');
 	//Uninstalls custom database tables.
 	register_deactivation_hook(__FILE__, 'psb_uninstall');
